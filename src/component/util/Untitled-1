@@ -1,0 +1,28 @@
+
+// Objects 
+Widget
+ - type
+ - thumbnail
+Worksheet 
+Homework
+
+// hooks
+
+
+widgetReducer(state, action`) // 
+ Actions
+  - addWidget
+  - deleteWidget
+  - changeWidgetPoint
+
+useWorksheet()
+    - addWidget(widgetType, x, y)
+    - deleteWidget(widgetId)3
+
+useHomework()
+    - addWorksheet()
+    - deleteWorksheet()
+    - updateWorksheet()
+    - duplicateWorksheet()
+    - autoSyncFirebase()
+  n  
