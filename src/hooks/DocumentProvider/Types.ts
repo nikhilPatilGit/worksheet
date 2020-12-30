@@ -7,7 +7,12 @@ export type MapActionState = Map<ActionType, (state: DocumentState, action: Docu
 // export type ActionType = "AddSheet" | "AddSheetArray" | "AddWidget";
 
 export enum ActionType {
-  "AddSheet", "AddSheetArray", "AddWidget"
+  "AddNewSheet", "AddSheetArray", "AddWidget"
+}
+
+export type NewSheet = {
+  result: Sheet;
+  index: number;
 }
 
 export type DocumentAction = {
@@ -15,8 +20,8 @@ export type DocumentAction = {
   result: Widget;
 }
 | {
-  type: ActionType.AddSheet;
-  result: Sheet;
+  type: ActionType.AddNewSheet;
+  result: NewSheet;
 }
 | {
   type: ActionType.AddSheetArray;

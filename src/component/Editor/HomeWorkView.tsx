@@ -1,7 +1,7 @@
 import { Flex, VStack } from "@chakra-ui/react";
 import React, { useContext, useEffect } from "react";
 import { DocumentReducerContext, DocumentStateContext } from "src/hooks/DocumentProvider";
-import { DocumentAction } from "src/hooks/DocumentProvider/Types";
+import { ActionType, DocumentAction } from "src/hooks/DocumentProvider/Types";
 import { DocumentState } from "src/hooks/DocumentProvider/DocumentState";
 import { Sheet } from "src/hooks/DocumentProvider/Model";
 
@@ -26,9 +26,21 @@ export const HomeWorkView = () => {
     let sheets: Sheet[] = [sheet, sheet];
     // let documentResult: DocumentResult<Sheet[]> = new DocumentResult<Sheet[]>("AddSheet", sheets);  
     // let documentWidget: DocumentResult<Widget>  = new DocumentResult<Widget>("AddSheet", new TextWidget("TextWidget"));
+
+    dispatch({type: ActionType.AddSheetArray, result: sheets});
+    
+    // if(state.sheet){
+    //   dispatch({type: ActionType.AddNewSheet, result: {
+    //     result: sheet,
+    //     index: 1
+    //   }});
+    // }
+    // else {
+      
+    // }
  
-    console.log(lodash.range(11));
-    dispatch({type: "AddSheet", result: [new Sheet(), new Sheet()]});
+
+
   }, []);
 
   return (
