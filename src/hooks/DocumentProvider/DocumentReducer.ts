@@ -3,6 +3,9 @@ import { DocumentAction } from "./Types";
 import { DocumentState } from "./DocumentState";
 import { Sheet } from "./Model";
 import { MapActionState } from "./Types";
+import { TextWidget } from "src/component/Widget/Model";
+import { createGenericObject, isSheetArray, typeCheckArray } from "src/helper/TypeChecks";
+import { ErrorMessageWrongType } from "src/helper/Error";
 
 const updateObject = (oldState: DocumentState, newValues: DocumentState): DocumentState => {
   return Object.assign({}, oldState, newValues);
@@ -16,10 +19,12 @@ const addWidget = (
 };
 
 const addSheet = (state: DocumentState, action: DocumentAction): DocumentState => {
-  const sheet: Sheet[] = <Sheet[]>action.result;
-  console.log(typeof action);
+  const sheet: Sheet[] = action.result as Sheet[];  
+  if(isSheetArray(sheet)){
+    throw ErrorMessageWrongType("Sheet");
+  }
   return updateObject(state, {sheet: sheet});
-}
+};
 
 const documentActionLookUpTable = (
   state: DocumentState,

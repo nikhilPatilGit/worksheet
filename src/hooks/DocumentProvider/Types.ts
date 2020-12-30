@@ -10,8 +10,9 @@ export type DocumentAction = {
   }
   | {
     type: "AddSheet";
-    result: Sheet[];
+    result: Sheet[] | Sheet;
   }
+
 
 export type MapActionState = Map<ActionType, (ActionType: DocumentState, action: DocumentAction) => DocumentState>;
 export type ActionType = "AddSheet" | "AddWidget";

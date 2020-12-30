@@ -9,6 +9,8 @@ import ImageLoader from "../util/ImageLoader";
 import { TextWidget, Widget } from "../Widget/Model";
 import WorksheetToolbar from "./WorksheetToolbar";
 
+import lodash from 'lodash';
+
 export const HomeWorkView = () => {
   const state: DocumentState = useContext(DocumentStateContext);
   const dispatch: React.Dispatch<DocumentAction> = useContext(
@@ -24,7 +26,8 @@ export const HomeWorkView = () => {
     let sheets: Sheet[] = [sheet, sheet];
     // let documentResult: DocumentResult<Sheet[]> = new DocumentResult<Sheet[]>("AddSheet", sheets);  
     // let documentWidget: DocumentResult<Widget>  = new DocumentResult<Widget>("AddSheet", new TextWidget("TextWidget"));
-  
+ 
+    console.log(lodash.range(11));
     dispatch({type: "AddSheet", result: [new Sheet(), new Sheet()]});
   }, []);
 
