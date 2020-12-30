@@ -1,5 +1,5 @@
 import { Reducer } from "react";
-import { ActionType, DocumentAction, NewSheet } from "./Types";
+import { ActionType, DocumentAction, SheetIndex } from "./Types";
 import { DocumentState } from "./DocumentState";
 import { Sheet } from "./Model";
 import { MapActionState } from "./Types";
@@ -7,6 +7,7 @@ import { TextWidget } from "src/component/Widget/Model";
 import { createGenericObject, isSheet, isSheetArray } from "src/helper/TypeChecks";
 import { ErrorMessageWrongType } from "src/helper/Error";
 import { list } from "@chakra-ui/react";
+import { stat } from "fs";
 
 const updateObject = (oldState: DocumentState, newValues: DocumentState): DocumentState => {
   return Object.assign({}, oldState, newValues);
@@ -19,14 +20,25 @@ const addWidget = (
   return updateObject(state, { status: true });
 };
 
+const deleteSheet = (state: DocumentState, action: DocumentAction) => {
+  const sheetId: string = action.result as string;
+  const sheet: Sheet[] = state.sheet;
+  sheet.forEach((value: Sheet, index: number) => {
+    if(value.sheetId === sheetId){
+      sheet.splice(index,1);    
+    }
+  });
+  return updateObject(state, {sheet: sheet});
+}
+
 const addNewSheet = (state: DocumentState, action: DocumentAction): DocumentState => {
-  const newSheet: NewSheet = action.result as NewSheet;  
-  if(!isSheet(newSheet.result)){
+  const newSheet: SheetIndex = action.result as SheetIndex;  
+  if(!isSheet(newSheet.sheet)){
     throw ErrorMessageWrongType("Sheet");
   }
 
   let sheet: Sheet[] = state.sheet;
-  sheet.splice(newSheet.index,0, newSheet.result);
+  sheet.splice(newSheet.index,0, newSheet.sheet);
   
   return updateObject(state, {sheet: sheet});
 };
@@ -53,6 +65,7 @@ export const DocumentReducer: Reducer<DocumentState, DocumentAction> = (
     [ActionType.AddWidget, addWidget],
     [ActionType.AddNewSheet, addNewSheet],
     [ActionType.AddSheetArray, addSheetArray],
+    [ActionType.DeleteSheet, deleteSheet],
   ]);
   return documentActionLookUpTable(
     { ...documentState },

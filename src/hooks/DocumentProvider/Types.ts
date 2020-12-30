@@ -4,14 +4,13 @@ import { DocumentState } from "./DocumentState";
 import { Sheet } from "./Model";
 
 export type MapActionState = Map<ActionType, (state: DocumentState, action: DocumentAction) => DocumentState>;
-// export type ActionType = "AddSheet" | "AddSheetArray" | "AddWidget";
 
 export enum ActionType {
-  "AddNewSheet", "AddSheetArray", "AddWidget"
+  "AddNewSheet", "AddSheetArray", "AddWidget", "DeleteSheet"
 }
 
-export type NewSheet = {
-  result: Sheet;
+export type SheetIndex = {
+  sheet: Sheet;
   index: number;
 }
 
@@ -21,7 +20,11 @@ export type DocumentAction = {
 }
 | {
   type: ActionType.AddNewSheet;
-  result: NewSheet;
+  result: SheetIndex;
+}
+| {
+  type: ActionType.DeleteSheet;
+  result: string;
 }
 | {
   type: ActionType.AddSheetArray;

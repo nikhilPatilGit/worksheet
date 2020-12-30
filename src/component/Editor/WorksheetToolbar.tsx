@@ -15,12 +15,17 @@ const WorksheetToolbar = () => {
   const hiddenFileInput = useRef(null);
 
   const handleClick = (event: React.MouseEvent) => {
+    // dispatch({
+    //   type: ActionType.AddNewSheet,
+    //   result: {
+    //     sheet: new Sheet(),
+    //     index: 1,
+    //   },
+    // });
+
     dispatch({
-      type: ActionType.AddNewSheet,
-      result: {
-        result: new Sheet(),
-        index: 1,
-      },
+      type: ActionType.DeleteSheet,
+      result: "123",
     });
     //hiddenFileInput.current.click();
   };

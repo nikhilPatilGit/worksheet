@@ -23,6 +23,7 @@ export const HomeWorkView = () => {
 
   useEffect(() => {
     let sheet = new Sheet();
+    sheet.sheetId = "123";
     let sheets: Sheet[] = [sheet, sheet];
     // let documentResult: DocumentResult<Sheet[]> = new DocumentResult<Sheet[]>("AddSheet", sheets);  
     // let documentWidget: DocumentResult<Widget>  = new DocumentResult<Widget>("AddSheet", new TextWidget("TextWidget"));
