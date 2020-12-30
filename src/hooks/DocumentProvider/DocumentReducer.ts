@@ -1,5 +1,5 @@
 import { Reducer } from "react";
-import { DocumentAction } from "./Types";
+import { ActionType, DocumentAction } from "./Types";
 import { DocumentState } from "./DocumentState";
 import { Sheet } from "./Model";
 import { MapActionState } from "./Types";
@@ -20,11 +20,13 @@ const addWidget = (
 
 const addSheet = (state: DocumentState, action: DocumentAction): DocumentState => {
   const sheet: Sheet[] = action.result as Sheet[];  
-  if(isSheetArray(sheet)){
+  if(!isSheetArray(sheet)){
     throw ErrorMessageWrongType("Sheet");
   }
   return updateObject(state, {sheet: sheet});
 };
+
+const addSheetArray = (value: string) => {}
 
 const documentActionLookUpTable = (
   state: DocumentState,
@@ -36,12 +38,14 @@ export const DocumentReducer: Reducer<DocumentState, DocumentAction> = (
   documentState: DocumentState,
   documentAction: DocumentAction
 ) => {
+  let map: MapActionState = new Map([
+    [ActionType.AddWidget, addWidget],
+    [ActionType.AddSheet, addSheet],
+    [ActionType.AddSheetArray, addSheet],
+  ]);
   return documentActionLookUpTable(
     { ...documentState },
     documentAction,
-    new Map([
-      ["AddWidget", addWidget],
-      ["AddSheet", addSheet],
-    ])
+    map
   );
 };

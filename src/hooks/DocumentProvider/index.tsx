@@ -1,9 +1,9 @@
 import { createContext } from "react";
 import { Context } from "react";
 import { FC, useReducer, Reducer } from "react";
-import { DocumentAction } from "./DocumentAction";
 import { DocumentReducer } from "./DocumentReducer";
 import { DocumentState } from "./DocumentState";
+import { DocumentAction } from "./Types";
 
 export const DocumentStateContext: Context<DocumentState> = createContext({});
 export const DocumentReducerContext = createContext(
