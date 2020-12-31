@@ -30,17 +30,6 @@ export const HomeWorkView = () => {
 
     dispatch({type: ActionType.AddSheetArray, result: sheets});
     
-    // if(state.sheet){
-    //   dispatch({type: ActionType.AddNewSheet, result: {
-    //     result: sheet,
-    //     index: 1
-    //   }});
-    // }
-    // else {
-      
-    // }
- 
-
 
   }, []);
 

@@ -3,20 +3,15 @@ import { ActionType, DocumentAction, SheetIndex } from "./Types";
 import { DocumentState } from "./DocumentState";
 import { Sheet } from "./Model";
 import { MapActionState } from "./Types";
-import { TextWidget } from "src/component/Widget/Model";
-import { createGenericObject, isSheet, isSheetArray } from "src/helper/TypeChecks";
+import { isSheet, isSheetArray } from "src/helper/TypeChecks";
 import { ErrorMessageWrongType } from "src/helper/Error";
-import { list } from "@chakra-ui/react";
-import { stat } from "fs";
 
 const updateObject = (oldState: DocumentState, newValues: DocumentState): DocumentState => {
   return Object.assign({}, oldState, newValues);
 };
 
 const addWidget = (
-  state: DocumentState,
-  action: DocumentAction
-): DocumentState => {
+  state: DocumentState): DocumentState => {
   return updateObject(state, { status: true });
 };
 
