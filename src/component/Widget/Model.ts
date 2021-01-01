@@ -1,11 +1,6 @@
 import { JsonProperty } from "json-typescript-mapper";
 import { isUrlValid } from "../util/Validations";
-
-// export type WidgetType =
-//   | "TextWidget"
-//   | "MCQWidget"
-//   | "ImageWidget"
-//   | "VideoWidget";
+import { v4 as uuidv4 } from "uuid";
 
 export enum WidgetType {
   MCQWidget,
@@ -15,22 +10,20 @@ export enum WidgetType {
 }
 
 export abstract class Widget { 
-  private _thumbUrl: string;
+  private _widgetId: string;
+  private _widgetType: WidgetType;
   
-  constructor(public widgetType: WidgetType) {
-    this.widgetType = widgetType;
+  constructor(widgetId: string, widgetType: WidgetType) {
+    this._widgetId = widgetId
+    this._widgetType = widgetType;
   }
 
-  get thumbUrl(): string {
-    return this._thumbUrl;
+  get widgetType(): WidgetType {
+    return this._widgetType;
   }
 
-  set thumbUrl(thumbUrl: string) {
-    if (thumbUrl && !isUrlValid(thumbUrl)) {
-      throw new Error(`Invalid URL -> ${thumbUrl}`);
-    }
-
-    this._thumbUrl = thumbUrl;
+  get widgetId(): string {
+    return this._widgetId;
   }
 
 }
@@ -40,7 +33,7 @@ export class TextWidget extends Widget {
   private _correctAnswer: string; 
 
   constructor(widgetType: WidgetType) {
-    super(widgetType);
+    super(uuidv4(), widgetType);
   }
 
   get inputText(): string {
@@ -64,7 +57,7 @@ export class ImageWidget extends Widget {
   private _url: string;  
 
   constructor(widgetType: WidgetType) {
-    super(widgetType);
+    super(uuidv4(), widgetType);
   }
 
   get url(): string {
