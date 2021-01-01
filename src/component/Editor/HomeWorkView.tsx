@@ -6,7 +6,7 @@ import { DocumentState } from "src/hooks/DocumentProvider/DocumentState";
 import { Sheet } from "src/hooks/DocumentProvider/Model";
 
 import ImageLoader from "../util/ImageLoader";
-import { TextWidget, Widget } from "../Widget/Model";
+import { ImageWidget, TextWidget, Widget, WidgetType } from "../Widget/Model";
 import WorksheetToolbar from "./WorksheetToolbar";
 
 import lodash from 'lodash';
@@ -24,11 +24,14 @@ export const HomeWorkView = () => {
   useEffect(() => {
     let sheet = new Sheet();
     sheet.sheetId = "123";
+    sheet.widgets = [new TextWidget(WidgetType.TextWidget)];
     let sheets: Sheet[] = [sheet, sheet];
     // let documentResult: DocumentResult<Sheet[]> = new DocumentResult<Sheet[]>("AddSheet", sheets);  
     // let documentWidget: DocumentResult<Widget>  = new DocumentResult<Widget>("AddSheet", new TextWidget("TextWidget"));
 
-    dispatch({type: ActionType.AddSheetArray, result: sheets});
+    let wudget = new ImageWidget(WidgetType.ImageWidget);
+    console.log(wudget);
+    dispatch({type: ActionType.AddWidget, result: wudget});
     
 
   }, []);

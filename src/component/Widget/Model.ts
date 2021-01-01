@@ -1,11 +1,18 @@
 import { JsonProperty } from "json-typescript-mapper";
 import { isUrlValid } from "../util/Validations";
 
-export type WidgetType =
-  | "TextWidget"
-  | "MCQWidget"
-  | "ImageWidget"
-  | "VideoWidget";
+// export type WidgetType =
+//   | "TextWidget"
+//   | "MCQWidget"
+//   | "ImageWidget"
+//   | "VideoWidget";
+
+export enum WidgetType {
+  MCQWidget,
+  ImageWidget,
+  VideoWidget,
+  TextWidget
+}
 
 export abstract class Widget { 
   private _thumbUrl: string;
@@ -50,5 +57,21 @@ export class TextWidget extends Widget {
 
   set correctAnswer(answer: string) {
       this._correctAnswer = answer;
+  }
+}
+
+export class ImageWidget extends Widget {
+  private _url: string;  
+
+  constructor(widgetType: WidgetType) {
+    super(widgetType);
+  }
+
+  get url(): string {
+      return this._url;
+  }
+  
+  set url(url: string) {
+      this._url = url;
   }
 }

@@ -3,27 +3,50 @@ import { ActionType, DocumentAction, SheetIndex } from "./Types";
 import { DocumentState } from "./DocumentState";
 import { Sheet } from "./Model";
 import { MapActionState } from "./Types";
-import { isSheet, isSheetArray } from "src/helper/TypeChecks";
+import { isSheet, isSheetArray, isWidget, Optional } from "src/helper/TypeChecks";
 import { ErrorMessageWrongType } from "src/helper/Error";
+import { TextWidget, Widget } from "src/component/Widget/Model";
 
 const updateObject = (oldState: DocumentState, newValues: DocumentState): DocumentState => {
   return Object.assign({}, oldState, newValues);
 };
 
-const addWidget = (
-  state: DocumentState): DocumentState => {
-  return updateObject(state, { status: true });
+function updateItemInSheets(array: Sheet[], itemId: string, updateItemCallback: (item: Sheet) => Sheet) {
+  const updatedItems: Sheet[] = array.map(item => {
+    if (item.sheetId !== itemId) {
+      return item
+    }
+
+    return updateItemCallback(item);
+  });
+
+  return updatedItems
+}
+
+const addWidget = (state: DocumentState, action: DocumentAction): DocumentState => {
+  const widget: Widget = action.result as Widget;
+  if(!isWidget(widget)){
+    throw ErrorMessageWrongType("Widget");
+  }
+  if(Optional(state.sheets) && Optional(state.currentSheetId)){       
+    const sheets: Sheet[] = updateItemInSheets(state.sheets, state.currentSheetId, (sheet: Sheet) => {
+      sheet.widgets.push(widget);
+      return sheet;
+    });  
+    return updateObject(state, {sheets: sheets});
+  }
+  return state;  
 };
 
 const deleteSheet = (state: DocumentState, action: DocumentAction) => {
   const sheetId: string = action.result as string;
-  const sheet: Sheet[] = state.sheet;
+  const sheet: Sheet[] = state.sheets;
   sheet.forEach((value: Sheet, index: number) => {
     if(value.sheetId === sheetId){
       sheet.splice(index,1);    
     }
   });
-  return updateObject(state, {sheet: sheet});
+  return updateObject(state, {sheets: sheet});
 }
 
 const addNewSheet = (state: DocumentState, action: DocumentAction): DocumentState => {
@@ -32,10 +55,10 @@ const addNewSheet = (state: DocumentState, action: DocumentAction): DocumentStat
     throw ErrorMessageWrongType("Sheet");
   }
 
-  let sheet: Sheet[] = state.sheet;
+  let sheet: Sheet[] = state.sheets;
   sheet.splice(newSheet.index,0, newSheet.sheet);
   
-  return updateObject(state, {sheet: sheet});
+  return updateObject(state, {sheets: sheet});
 };
 
 const addSheetArray = (state: DocumentState, action: DocumentAction): DocumentState => {
@@ -43,7 +66,7 @@ const addSheetArray = (state: DocumentState, action: DocumentAction): DocumentSt
   if(!isSheetArray(sheet)){
     throw ErrorMessageWrongType("Sheet[]");
   }
-  return updateObject(state, {sheet: sheet});
+  return updateObject(state, {sheets: sheet});
 };
 
 const documentActionLookUpTable = (

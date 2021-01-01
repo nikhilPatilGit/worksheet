@@ -2,6 +2,6 @@ import { Sheet } from "./Model";
 
 export type DocumentState = {
   currentSheetId?: string;
-  sheet?: Sheet[];
+  sheets?: Sheet[];
   status?: boolean;
 };

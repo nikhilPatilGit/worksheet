@@ -1,10 +1,8 @@
 import { Sheet } from "src/hooks/DocumentProvider/Model";
 var _ = require("lodash");
 import lodash from "lodash";
-
-export const createGenericObject = <T>(c: { new (): T }): T => {
-    return new c();
-  }
+import { TextWidget, Widget, WidgetType } from "src/component/Widget/Model";
+import { createGenericObject, createWidgetObject, WidgetFactory } from "./Factories";
 
 export const typeCheckObjectArray = (type: Object, array: Object[]): boolean => {
     array.forEach((obj: Object) => {
@@ -33,3 +31,11 @@ export const isSheetArray = (sheet: Sheet[]): boolean => {
 export const isSheet = (sheet: Sheet): boolean => {
   return typeCheckObject(createGenericObject(Sheet), sheet);
 };
+
+export const isWidget = (widget: Widget): boolean => {
+  return typeCheckObject(WidgetFactory(widget.widgetType), widget);
+};
+
+export const Optional = <T>(optional: T): boolean => {
+ return typeof optional !== 'undefined'; 
+}
