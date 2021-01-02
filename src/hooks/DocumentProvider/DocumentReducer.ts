@@ -1,5 +1,5 @@
 import { Reducer } from "react";
-import { ActionType, DocumentAction, SheetIndex, UpdateWidgetPositionType, UpdateWidgetType } from "./Types";
+import { ActionType, DocumentAction, SheetIndex } from "./Types";
 import { DocumentState } from "./DocumentState";
 import { Sheet } from "./Model";
 import { MapActionState } from "./Types";
@@ -10,7 +10,8 @@ import {
   Optional,
 } from "src/helper/TypeChecks";
 import { ErrorMessageWrongType } from "src/helper/Error";
-import { TextWidget, Widget } from "src/component/Widget/Model";
+import { Widget } from "src/component/Widget/Model";
+import { UpdateWidgetPosition } from "src/modals/Widget";
 
 const updateObject = (
   oldState: DocumentState,
@@ -78,14 +79,17 @@ const updateWidgetPostion = (
   state: DocumentState,
   action: DocumentAction
 ): DocumentState => {
-  const widgetUpdate: UpdateWidgetPositionType = action.result as UpdateWidgetPositionType;
+  if (action.result instanceof UpdateWidgetPosition) {
+    throw ErrorMessageWrongType("UpdateWidgetPosition");
+  }
+  const widgetUpdate: UpdateWidgetPosition = action.result as UpdateWidgetPosition;
   if (Optional(state.sheets) && Optional(state.currentSheetId)) {
     const sheets: Sheet[] = updateItemInSheets(
       state.sheets,
       state.currentSheetId,
       (sheet: Sheet) => {
         const widgets: Widget[] = updateItemInWidgets(sheet.widgets, widgetUpdate.widgetId, (widget: Widget)=>{
-          widget.position = widgetUpdate.position;  
+          widget.position = widgetUpdate.postion;  
           return widget;
         });
         sheet.widgets = widgets;
@@ -171,7 +175,7 @@ export const DocumentReducer: Reducer<DocumentState, DocumentAction> = (
     [ActionType.AddSheetArray, addSheetArray],
     [ActionType.DeleteSheet, deleteSheet],
     [ActionType.DeleteWidget, deleteWidget],
-    [ActionType.UpdateWidgetPosition, updateWidgetPostion]
+    [ActionType.UpdatePosition, updateWidgetPostion]
   ]);
   return documentActionLookUpTable({ ...documentState }, documentAction, map);
 };

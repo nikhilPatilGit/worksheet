@@ -1,12 +1,11 @@
 import { Flex, Spacer, Button, IconButton, Input } from "@chakra-ui/react";
 import React, { useContext, useRef } from "react";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
-import { HiOutlineUpload, HiDuplicate, HiTrash } from "react-icons/hi";
+import { HiDuplicate, HiTrash } from "react-icons/hi";
 import { DocumentReducerContext } from "src/hooks/DocumentProvider";
-import { Sheet } from "src/hooks/DocumentProvider/Model";
 import { ActionType, DocumentAction } from "src/hooks/DocumentProvider/Types";
+import { Position, UpdateWidgetPosition } from "src/modals/Widget";
 import CustomListPopver from "../util/CustomListPopover";
-import { WorksheetView } from "./WorksheetView";
 
 const WorksheetToolbar = () => {
   const dispatch: React.Dispatch<DocumentAction> = useContext(
@@ -14,7 +13,7 @@ const WorksheetToolbar = () => {
   );
   const hiddenFileInput = useRef(null);
 
-  const handleClick = (event: React.MouseEvent) => {
+  const handleClick = () => {
     // dispatch({
     //   type: ActionType.AddNewSheet,
     //   result: {
@@ -23,9 +22,10 @@ const WorksheetToolbar = () => {
     //   },
     // });
 
+
     dispatch({
-      type: ActionType.UpdateWidgetPosition,
-      result: {widgetId: "ae129bcf-5a89-4c6e-bbb9-7b63d00c38ec", position: {x:222, y:333}},
+      type: ActionType.UpdatePosition,
+      result: new UpdateWidgetPosition("ae129bcf-5a89-4c6e-bbb9-7b63d00c38ec", new Position(222, 333)),
     });
     //hiddenFileInput.current.click();
   };

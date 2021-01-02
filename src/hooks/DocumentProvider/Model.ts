@@ -34,3 +34,11 @@ export class Sheet {
       this._widgets = widgets;
   }
 }
+
+export class SheetIndex extends Sheet {
+  private _index: number;
+  
+  public get index() : number {
+    return this._index;
+  }  
+}
