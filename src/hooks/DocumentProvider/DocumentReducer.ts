@@ -1,5 +1,5 @@
 import { Reducer } from "react";
-import { ActionType, DocumentAction, SheetIndex } from "./Types";
+import { ActionType, DocumentAction, SheetIndex, UpdateWidgetPositionType, UpdateWidgetType } from "./Types";
 import { DocumentState } from "./DocumentState";
 import { Sheet } from "./Model";
 import { MapActionState } from "./Types";
@@ -72,6 +72,30 @@ const addWidget = (
   }
   return state;
 };
+
+
+const updateWidgetPostion = (
+  state: DocumentState,
+  action: DocumentAction
+): DocumentState => {
+  const widgetUpdate: UpdateWidgetPositionType = action.result as UpdateWidgetPositionType;
+  if (Optional(state.sheets) && Optional(state.currentSheetId)) {
+    const sheets: Sheet[] = updateItemInSheets(
+      state.sheets,
+      state.currentSheetId,
+      (sheet: Sheet) => {
+        const widgets: Widget[] = updateItemInWidgets(sheet.widgets, widgetUpdate.widgetId, (widget: Widget)=>{
+          widget.position = widgetUpdate.position;  
+          return widget;
+        });
+        sheet.widgets = widgets;
+        return sheet;
+      }
+    );
+    return updateObject(state, { sheets: sheets });
+  }
+  return state;
+}
 
 const deleteWidget = (state: DocumentState, action: DocumentAction) => {
   const widgetId: string = action.result as string;
@@ -147,6 +171,7 @@ export const DocumentReducer: Reducer<DocumentState, DocumentAction> = (
     [ActionType.AddSheetArray, addSheetArray],
     [ActionType.DeleteSheet, deleteSheet],
     [ActionType.DeleteWidget, deleteWidget],
+    [ActionType.UpdateWidgetPosition, updateWidgetPostion]
   ]);
   return documentActionLookUpTable({ ...documentState }, documentAction, map);
 };

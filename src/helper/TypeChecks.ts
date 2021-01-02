@@ -3,6 +3,7 @@ var _ = require("lodash");
 import lodash from "lodash";
 import { TextWidget, Widget, WidgetType } from "src/component/Widget/Model";
 import { createGenericObject, createWidgetObject, WidgetFactory } from "./Factories";
+import { UpdateWidgetPositionType } from "src/hooks/DocumentProvider/Types";
 
 export const typeCheckObjectArray = (type: Object, array: Object[]): boolean => {
     array.forEach((obj: Object) => {

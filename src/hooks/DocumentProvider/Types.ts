@@ -11,13 +11,18 @@ export type Position = {
 export type MapActionState = Map<ActionType, (state: DocumentState, action: DocumentAction) => DocumentState>;
 
 export enum ActionType {
-  "AddNewSheet", "AddSheetArray", "AddWidget", "DeleteSheet", "DeleteWidget"
+  "AddNewSheet", "AddSheetArray", "AddWidget", "DeleteSheet", "DeleteWidget", "UpdateWidgetPosition"
 }
 
 export type SheetIndex = {
   sheet: Sheet;
   index: number;
 }
+
+export type UpdateWidgetPositionType = { 
+  widgetId: string;
+  position: Position;
+};
 
 export type DocumentAction = {
   type: ActionType.AddWidget;
@@ -26,6 +31,10 @@ export type DocumentAction = {
 | {
   type: ActionType.DeleteWidget;
   result: string;
+}
+| {
+  type: ActionType.UpdateWidgetPosition;
+  result: UpdateWidgetPositionType;
 }
 | {
   type: ActionType.AddNewSheet;

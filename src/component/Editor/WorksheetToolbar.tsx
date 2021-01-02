@@ -24,8 +24,8 @@ const WorksheetToolbar = () => {
     // });
 
     dispatch({
-      type: ActionType.DeleteSheet,
-      result: "123",
+      type: ActionType.UpdateWidgetPosition,
+      result: {widgetId: "ae129bcf-5a89-4c6e-bbb9-7b63d00c38ec", position: {x:222, y:333}},
     });
     //hiddenFileInput.current.click();
   };
