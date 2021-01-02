@@ -30,6 +30,7 @@ export const HomeWorkView = () => {
     // let documentWidget: DocumentResult<Widget>  = new DocumentResult<Widget>("AddSheet", new TextWidget("TextWidget"));
 
     let wudget = new ImageWidget(WidgetType.ImageWidget);
+    wudget.position = {x:123, y:234};
     console.log(wudget);
     dispatch({type: ActionType.AddWidget, result: wudget});
     

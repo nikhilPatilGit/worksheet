@@ -1,6 +1,7 @@
 import { JsonProperty } from "json-typescript-mapper";
 import { isUrlValid } from "../util/Validations";
 import { v4 as uuidv4 } from "uuid";
+import { Position } from "src/hooks/DocumentProvider/Types";
 
 export enum WidgetType {
   MCQWidget,
@@ -12,6 +13,7 @@ export enum WidgetType {
 export abstract class Widget { 
   private _widgetId: string;
   private _widgetType: WidgetType;
+  private _position: Position;
   
   constructor(widgetId: string, widgetType: WidgetType) {
     this._widgetId = widgetId
@@ -26,6 +28,13 @@ export abstract class Widget {
     return this._widgetId;
   }
 
+  get position():Position {
+    return this._position;
+  }
+
+  set position(position: Position) {
+    this._position = position;
+  }
 }
 
 export class TextWidget extends Widget {
