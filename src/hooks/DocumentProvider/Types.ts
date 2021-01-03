@@ -16,7 +16,8 @@ export enum ActionType {
   "DeleteSheet",
   "DeleteWidget",
   "UpdatePosition",
-}
+  UpdateTextWidget
+};
 
 // export type DocumentAction =
 // | {

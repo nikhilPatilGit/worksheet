@@ -1,7 +1,8 @@
 import { JsonProperty } from "json-typescript-mapper";
 import { isUrlValid } from "../util/Validations";
 import { v4 as uuidv4 } from "uuid";
-import { Position } from "src/hooks/DocumentProvider/Types";
+import { Position } from "src/modals/Widget";
+
 
 export enum WidgetType {
   MCQWidget,

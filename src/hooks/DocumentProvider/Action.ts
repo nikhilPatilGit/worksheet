@@ -21,14 +21,3 @@ export class ActionResult<T> extends DocumentAction{
       return this._result;
     }
 };
-
-// export class AddWidgetAction extends DocumentAction{
-//     private _result: Widget;
-//     constructor(result: Widget){
-//       super(ActionType.AddWidget);
-//       this._result = result;
-//     }
-//     get result(): Widget{
-//       return this._result;
-//     }
-// };

@@ -10,7 +10,7 @@ import {
   Optional,
 } from "src/helper/TypeChecks";
 import { ErrorMessageWrongType } from "src/helper/Error";
-import { Widget } from "src/component/Widget/Model";
+import { TextWidget, Widget } from "src/component/Widget/Model";
 import { UpdateWidgetPosition } from "src/modals/Widget";
 import { ActionResult, DocumentAction } from "./Action";
 
@@ -162,6 +162,31 @@ const addSheetArray = (
   return updateObject(state, { sheets: actionResult.result });
 };
 
+const updateTextWidget = (state: DocumentState, action: DocumentAction): DocumentState => {
+  const actionResult: ActionResult<TextWidget> = action as ActionResult<TextWidget>;
+  if(!(actionResult.result instanceof TextWidget)){
+    throw ErrorMessageWrongType("TextWidget");
+  }
+
+  if (Optional(state.sheets) && Optional(state.currentSheetId)) {
+    const sheets: Sheet[] = updateItemInSheets(
+      state.sheets,
+      state.currentSheetId,
+      (sheet: Sheet) => {
+        const widgets: Widget[] = updateItemInWidgets(sheet.widgets, actionResult.result.widgetId, (widget: Widget)=>{
+          widget = actionResult.result;  
+          return widget;
+        });
+        sheet.widgets = widgets;
+        return sheet;
+      }
+    );
+    return updateObject(state, { sheets: sheets });
+  }
+
+  return state;
+}
+
 const documentActionLookUpTable = (
   state: DocumentState,
   action: DocumentAction,
@@ -178,7 +203,8 @@ export const DocumentReducer: Reducer<DocumentState, DocumentAction> = (
     [ActionType.AddSheetArray, addSheetArray],
     [ActionType.DeleteSheet, deleteSheet],
     [ActionType.DeleteWidget, deleteWidget],
-    [ActionType.UpdatePosition, updateWidgetPostion]
+    [ActionType.UpdatePosition, updateWidgetPostion],
+    [ActionType.UpdateTextWidget, updateTextWidget]
   ]);
   return documentActionLookUpTable({ ...documentState }, documentAction, map);
 };
