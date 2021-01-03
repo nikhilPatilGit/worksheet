@@ -1,5 +1,6 @@
 import { Widget } from "src/component/Widget/Model";
 import { UpdateWidgetPosition } from "src/modals/Widget";
+import { DocumentAction } from "./Action";
 import { DocumentState } from "./DocumentState";
 import { Sheet, SheetIndex } from "./Model";
 
@@ -17,28 +18,28 @@ export enum ActionType {
   "UpdatePosition",
 }
 
-export type DocumentAction =
-| {
-  type: ActionType.UpdatePosition;
-  result: UpdateWidgetPosition;
-}
-  | {
-      type: ActionType.AddWidget;
-      result: Widget;
-    }
-  | {
-      type: ActionType.DeleteWidget;
-      result: string;
-    }
-  | {
-      type: ActionType.AddNewSheet;
-      result: SheetIndex;
-    }
-  | {
-      type: ActionType.DeleteSheet;
-      result: string;
-    }
-  | {
-      type: ActionType.AddSheetArray;
-      result: Sheet[];
-    };
+// export type DocumentAction =
+// | {
+//   type: ActionType.UpdatePosition;
+//   result: UpdateWidgetPosition;
+// }
+//   | {
+//       type: ActionType.AddWidget;
+//       result: Widget;
+//     }
+//   | {
+//       type: ActionType.DeleteWidget;
+//       result: string;
+//     }
+//   | {
+//       type: ActionType.AddNewSheet;
+//       result: SheetIndex;
+//     }
+//   | {
+//       type: ActionType.DeleteSheet;
+//       result: string;
+//     }
+//   | {
+//       type: ActionType.AddSheetArray;
+//       result: Sheet[];
+//     };

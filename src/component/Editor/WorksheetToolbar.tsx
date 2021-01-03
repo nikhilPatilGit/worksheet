@@ -2,8 +2,10 @@ import { Flex, Spacer, Button, IconButton, Input } from "@chakra-ui/react";
 import React, { useContext, useRef } from "react";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { HiDuplicate, HiTrash } from "react-icons/hi";
+import { createActionResult } from "src/helper/Factories";
 import { DocumentReducerContext } from "src/hooks/DocumentProvider";
-import { ActionType, DocumentAction } from "src/hooks/DocumentProvider/Types";
+import { DocumentAction } from "src/hooks/DocumentProvider/Action";
+import { ActionType } from "src/hooks/DocumentProvider/Types";
 import { Position, UpdateWidgetPosition } from "src/modals/Widget";
 import CustomListPopver from "../util/CustomListPopover";
 
@@ -23,10 +25,7 @@ const WorksheetToolbar = () => {
     // });
 
 
-    dispatch({
-      type: ActionType.UpdatePosition,
-      result: new UpdateWidgetPosition("ae129bcf-5a89-4c6e-bbb9-7b63d00c38ec", new Position(222, 333)),
-    });
+    dispatch(createActionResult<string>(ActionType.DeleteSheet, "123"));
     //hiddenFileInput.current.click();
   };
 

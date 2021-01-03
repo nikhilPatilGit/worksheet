@@ -1,7 +1,7 @@
 import { Flex, VStack } from "@chakra-ui/react";
 import React, { useContext, useEffect } from "react";
 import { DocumentReducerContext, DocumentStateContext } from "src/hooks/DocumentProvider";
-import { ActionType, DocumentAction } from "src/hooks/DocumentProvider/Types";
+import { ActionType } from "src/hooks/DocumentProvider/Types";
 import { DocumentState } from "src/hooks/DocumentProvider/DocumentState";
 import { Sheet } from "src/hooks/DocumentProvider/Model";
 
@@ -10,6 +10,8 @@ import { ImageWidget, TextWidget, Widget, WidgetType } from "../Widget/Model";
 import WorksheetToolbar from "./WorksheetToolbar";
 
 import lodash from 'lodash';
+import { DocumentAction } from "src/hooks/DocumentProvider/Action";
+import { createActionResult } from "src/helper/Factories";
 
 export const HomeWorkView = () => {
   const state: DocumentState = useContext(DocumentStateContext);
@@ -22,19 +24,20 @@ export const HomeWorkView = () => {
   });
 
   useEffect(() => {
+
+    let imageWidget = new ImageWidget(WidgetType.ImageWidget);
+    imageWidget.position = {x:123, y:234};
+
     let sheet = new Sheet();
     sheet.sheetId = "123";
-    sheet.widgets = [new TextWidget(WidgetType.TextWidget)];
+    sheet.widgets = [new TextWidget(WidgetType.TextWidget), imageWidget];
     let sheets: Sheet[] = [sheet, sheet];
+
     // let documentResult: DocumentResult<Sheet[]> = new DocumentResult<Sheet[]>("AddSheet", sheets);  
     // let documentWidget: DocumentResult<Widget>  = new DocumentResult<Widget>("AddSheet", new TextWidget("TextWidget"));
 
-    let wudget = new ImageWidget(WidgetType.ImageWidget);
-    wudget.position = {x:123, y:234};
-    console.log(wudget);
-    dispatch({type: ActionType.AddWidget, result: wudget});
+    dispatch(createActionResult<Sheet[]>(ActionType.AddSheetArray, sheets));
     
-
   }, []);
 
   return (

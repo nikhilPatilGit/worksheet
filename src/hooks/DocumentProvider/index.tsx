@@ -2,10 +2,10 @@ import { createContext } from "react";
 import { Context } from "react";
 import { FC, useReducer, Reducer } from "react";
 import { TextWidget, WidgetType } from "src/component/Widget/Model";
+import { DocumentAction } from "./Action";
 import { DocumentReducer } from "./DocumentReducer";
 import { DocumentState } from "./DocumentState";
 import { Sheet } from "./Model";
-import { DocumentAction } from "./Types";
 
 export const DocumentStateContext: Context<DocumentState> = createContext({});
 export const DocumentReducerContext = createContext(

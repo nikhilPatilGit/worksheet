@@ -1,4 +1,6 @@
 import { ImageWidget, TextWidget, Widget, WidgetType } from "src/component/Widget/Model";
+import { ActionResult, AddWidgetAction, DocumentAction } from "src/hooks/DocumentProvider/Action";
+import { ActionType } from "src/hooks/DocumentProvider/Types";
 import { ErrorMessage, ErrorMessageWrongType } from "./Error";
 
 export const createGenericObject = <T>(c: { new (): T }): T => {
@@ -10,6 +12,10 @@ export const createWidgetObject = <T extends Widget>(
   arg: WidgetType
 ): T => {
   return new widget(arg);
+};
+
+export const createActionResult = <T>(actionResult: ActionType, result: T): DocumentAction => {
+  return new ActionResult<T>(actionResult, result);
 };
 
 export const WidgetFactory = (widgetType: WidgetType): Widget => {
