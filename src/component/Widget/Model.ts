@@ -1,5 +1,5 @@
 import { JsonProperty } from "json-typescript-mapper";
-import { isUrlValid } from "../util/Validations";
+import { isUrlValid } from "../../util/Validations";
 import { v4 as uuidv4 } from "uuid";
 import { Position } from "src/modals/Widget";
 
@@ -42,8 +42,8 @@ export class TextWidget extends Widget {
   private _inputText: string;  
   private _correctAnswer: string; 
 
-  constructor(widgetType: WidgetType) {
-    super(uuidv4(), widgetType);
+  constructor() {
+    super(uuidv4(), WidgetType.TextWidget);
   }
 
   get inputText(): string {
@@ -66,8 +66,8 @@ export class TextWidget extends Widget {
 export class ImageWidget extends Widget {
   private _url: string;  
 
-  constructor(widgetType: WidgetType) {
-    super(uuidv4(), widgetType);
+  constructor() {
+    super(uuidv4(), WidgetType.ImageWidget);
   }
 
   get url(): string {

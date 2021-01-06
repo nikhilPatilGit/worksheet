@@ -2,6 +2,7 @@ import { createContext } from "react";
 import { Context } from "react";
 import { FC, useReducer, Reducer } from "react";
 import { TextWidget, WidgetType } from "src/component/Widget/Model";
+import { initialDocumentState } from "src/util/DummyData";
 import { DocumentAction } from "./Action";
 import { DocumentReducer } from "./DocumentReducer";
 import { DocumentState } from "./DocumentState";
@@ -13,13 +14,9 @@ export const DocumentReducerContext = createContext(
 );
 
 export const DocumentProvider: FC = ({ children }) => {
-  let sheet = new Sheet();
-  sheet.sheetId = "123";
-  sheet.widgets = [new TextWidget(WidgetType.TextWidget)];
-  const initialState: DocumentState =  {currentSheetId: "123", sheets: [sheet, sheet]};
   const [state, dispatch] = useReducer<Reducer<DocumentState, DocumentAction>>(
     DocumentReducer,
-    initialState
+    initialDocumentState()
   );
 
   return (

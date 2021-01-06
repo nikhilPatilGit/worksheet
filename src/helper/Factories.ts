@@ -1,5 +1,5 @@
 import { ImageWidget, TextWidget, Widget, WidgetType } from "src/component/Widget/Model";
-import { ActionResult, AddWidgetAction, DocumentAction } from "src/hooks/DocumentProvider/Action";
+import { ActionResult, DocumentAction } from "src/hooks/DocumentProvider/Action";
 import { ActionType } from "src/hooks/DocumentProvider/Types";
 import { ErrorMessage, ErrorMessageWrongType } from "./Error";
 

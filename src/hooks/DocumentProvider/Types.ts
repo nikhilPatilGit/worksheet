@@ -10,12 +10,12 @@ export type MapActionState = Map<
 >;
 
 export enum ActionType {
-  "AddNewSheet",
-  "AddSheetArray",
-  "AddWidget",
-  "DeleteSheet",
-  "DeleteWidget",
-  "UpdatePosition",
+  AddNewSheet,
+  AddSheetArray,
+  AddWidget,
+  DeleteSheet,
+  DeleteWidget,
+  UpdatePosition,
   UpdateTextWidget
 };
 

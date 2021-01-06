@@ -1,5 +1,6 @@
 import { Image, Skeleton } from "@chakra-ui/react";
-import { FC, SyntheticEvent, useState } from "react";
+import { FC, SyntheticEvent, useEffect, useState } from "react";
+
 
 interface IProps {
   src: string;

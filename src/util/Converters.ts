@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { TextWidget, Widget } from "../Widget/Model";
+import { TextWidget, Widget } from "../component/Widget/Model";
 
 export const WidgetToJson = <Widget>(widgetObject: Widget): string => {
   return JSON.stringify(widgetObject).replace("_", "");
@@ -10,9 +10,9 @@ export const JsonToWidget = (jsonString: string): Widget => {
   if (hasOwnProperty(widget, "widgetType")) {
     switch (widget.widgetType) {
       case "TextWidget":
-        return new TextWidget("TextWidget");
+        return new TextWidget();
       case "ImageWidget":
-        return new TextWidget("TextWidget");
+        return new TextWidget();
       default:
         break;
     }

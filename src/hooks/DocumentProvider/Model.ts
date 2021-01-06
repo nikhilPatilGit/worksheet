@@ -1,4 +1,4 @@
-import { isUrlValid } from "src/component/util/Validations";
+import { isUrlValid } from "src/util/Validations";
 import { Widget } from "src/component/Widget/Model";
 
 export class Sheet {

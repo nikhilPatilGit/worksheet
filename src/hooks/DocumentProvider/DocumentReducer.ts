@@ -81,7 +81,7 @@ const updateWidgetPostion = (
   action: DocumentAction
 ): DocumentState => {
   const actionResult: ActionResult<UpdateWidgetPosition> = action as ActionResult<UpdateWidgetPosition>;
-  if (actionResult.result instanceof UpdateWidgetPosition) {
+  if (!(actionResult.result instanceof UpdateWidgetPosition)) {
     throw ErrorMessageWrongType("UpdateWidgetPosition");
   }
   if (Optional(state.sheets) && Optional(state.currentSheetId)) {
@@ -208,3 +208,4 @@ export const DocumentReducer: Reducer<DocumentState, DocumentAction> = (
   ]);
   return documentActionLookUpTable({ ...documentState }, documentAction, map);
 };
+ 

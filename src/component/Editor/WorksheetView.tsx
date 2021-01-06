@@ -3,7 +3,7 @@ import React from "react";
 import Link from 'next/link'
 
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
-import CustomListPopver from "../util/CustomListPopover";
+import CustomListPopver from "../../util/CustomListPopover";
 
 const UpdateWorksheet = () => {
   return <Flex w="100%" direction="row" >
