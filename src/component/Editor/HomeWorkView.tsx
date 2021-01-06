@@ -1,29 +1,16 @@
 import { Center, Flex, Grid, VStack, Image } from "@chakra-ui/react";
 import React, { useContext, useEffect } from "react";
 import {
-  DocumentReducerContext,
   DocumentStateContext,
 } from "src/hooks/DocumentProvider";
-import { ActionType } from "src/hooks/DocumentProvider/Types";
 import { DocumentState } from "src/hooks/DocumentProvider/DocumentState";
-import { Sheet } from "src/hooks/DocumentProvider/Model";
 
-import ImageLoader from "../../util/ImageLoader";
-import { ImageWidget, TextWidget, Widget, WidgetType } from "../Widget/Model";
 import WorksheetToolbar from "./WorksheetToolbar";
 
-import lodash from "lodash";
-import { DocumentAction } from "src/hooks/DocumentProvider/Action";
-import { createActionResult } from "src/helper/Factories";
-import { Position } from "src/modals/Widget";
-import SheetView from "./SheetView";
 import { SheetListView } from "./SheetListView";
 
 export const HomeWorkView = () => {
   const state: DocumentState = useContext(DocumentStateContext);
-  const dispatch: React.Dispatch<DocumentAction> = useContext(
-    DocumentReducerContext
-  );
 
   useEffect(() => {
     console.log(state);
