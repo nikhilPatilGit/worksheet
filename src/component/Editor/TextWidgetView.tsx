@@ -37,6 +37,7 @@ const TextWidgetView: FC<IProps> = ({ ...props }) => {
   };
 
   const [mdStatus, setMdStatus] = useState(false);
+  const [cursorType, setCursorType] = useState("text");
 
   const dispatch: React.Dispatch<DocumentAction> = useContext(
     DocumentReducerContext
@@ -47,7 +48,6 @@ const TextWidgetView: FC<IProps> = ({ ...props }) => {
   }, [props.position.x, props.position.y]);
 
   useEffect(() => {
-    console.log(mdStatus);
     if (!props.isActive) {
       setMdStatus(false);
     }
@@ -61,6 +61,11 @@ const TextWidgetView: FC<IProps> = ({ ...props }) => {
       w="200px"
       variant="filled"
       placeholder="Enter Input"
+      onClick={()=>setCursorType("text")}
+      onMouseEnter={()=>{
+        setCursorType("all-scroll");
+    }}
+      cursor={cursorType}      
     />
   );
 };
