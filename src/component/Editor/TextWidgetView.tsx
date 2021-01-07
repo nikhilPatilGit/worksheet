@@ -44,8 +44,6 @@ const TextWidgetView: FC<IProps> = ({ ...props }) => {
   }, [props.position.x, props.position.y]);
 
   useEffect(() => {
-    console.log(mouseStatus);
-
     if (!props.isActive) {
       setMouseStatus({ isMouseDown: false, isMouseUp: false });
     }

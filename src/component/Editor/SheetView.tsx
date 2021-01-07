@@ -46,13 +46,12 @@ const SheetView: FC<IProps> = ({ ...props }) => {
         console.log(event.clientX);
         console.log(event.clientY);
         let textWidget: TextWidget = new TextWidget();
-        textWidget.position = new Position(event.clientX, event.clientY);
+        textWidget.position = new Position(props.position.x-100, props.position.y-20);
         textWidget.inputText = "Dummy";        
           dispatch(createActionResult<Widget>(ActionType.AddWidget, textWidget));
       }}
       onDragOver={(event) => {
-        event.preventDefault();          
-        console.log("Drag Over "+props.position);
+        event.preventDefault();      
       }}
       position="relative"
     >
