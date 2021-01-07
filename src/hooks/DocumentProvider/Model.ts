@@ -1,5 +1,5 @@
+import { Widget } from "src/modals/Widget";
 import { isUrlValid } from "src/util/Validations";
-import { Widget } from "src/component/Widget/Model";
 
 export class Sheet {
   private _sheetId: string;

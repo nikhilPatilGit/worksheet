@@ -1,7 +1,7 @@
-import { ImageWidget, TextWidget, WidgetType } from "src/component/Widget/Model";
 import { DocumentState } from "src/hooks/DocumentProvider/DocumentState";
 import { Sheet } from "src/hooks/DocumentProvider/Model";
-import { Position } from "src/modals/Widget";
+import { Position } from "src/modals/Position";
+import { TextWidget, ImageWidget } from "src/modals/Widget";
 
 export const initialDocumentState = (): DocumentState => {
 

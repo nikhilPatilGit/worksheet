@@ -1,6 +1,7 @@
-import { ImageWidget, TextWidget, Widget, WidgetType } from "src/component/Widget/Model";
+
 import { ActionResult, DocumentAction } from "src/hooks/DocumentProvider/Action";
 import { ActionType } from "src/hooks/DocumentProvider/Types";
+import { Widget, WidgetType, TextWidget, ImageWidget } from "src/modals/Widget";
 import { ErrorMessage, ErrorMessageWrongType } from "./Error";
 
 export const createGenericObject = <T>(c: { new (): T }): T => {

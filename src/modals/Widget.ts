@@ -1,38 +1,77 @@
-export class Position {
-    private _x: number;
-    private _y: number;
+import { v4 as uuidv4 } from "uuid";
+import { Position } from "./Position";
 
-    constructor(x: number, y:number){
-        this._x = x;
-        this._y = y;
-    }
-
-    get x(): number{
-        return this._x
-    }
-
-    get y(): number{
-        return this._y
-    }
+export enum WidgetType {
+  MCQWidget,
+  ImageWidget,
+  VideoWidget,
+  TextWidget
 }
 
-export class UpdateWidgetPosition {
-    private _widgetId: string;
-    private _position: Position;
+export abstract class Widget { 
+  private _widgetId: string;
+  private _widgetType: WidgetType;
+  private _position: Position;
+  
+  constructor(widgetId: string, widgetType: WidgetType) {
+    this._widgetId = widgetId
+    this._widgetType = widgetType;
+  }
 
-    constructor(widgetId: string, position: Position){
-        this._widgetId = widgetId;
-        this._position = position;
-    }
+  get widgetType(): WidgetType {
+    return this._widgetType;
+  }
 
-    
-    public get widgetId() : string {
-        return this._widgetId;
-    }
-    
-    
-    public get postion() : Position {
-        return this._position; 
-    }
-    
+  get widgetId(): string {
+    return this._widgetId;
+  }
+
+  get position():Position {
+    return this._position;
+  }
+
+  set position(position: Position) {
+    this._position = position;
+  }
+}
+
+export class TextWidget extends Widget {
+  private _inputText: string;  
+  private _correctAnswer: string; 
+
+  constructor() {
+    super(uuidv4(), WidgetType.TextWidget);
+  }
+
+  get inputText(): string {
+      return this._inputText;
+  }
+  
+  set inputText(text: string) {
+      this._inputText = text;
+  }
+
+  get correctAnswer(): string {
+      return this._correctAnswer;
+  }
+
+  set correctAnswer(answer: string) {
+      this._correctAnswer = answer;
+  }
+}
+
+export class ImageWidget extends Widget {
+  private _url: string;  
+
+  constructor() {
+    super(uuidv4(), WidgetType.ImageWidget);
+  }
+
+  get url(): string {
+      return this._url;
+  }
+  
+  set url(url: string) {
+      this._url = url;
+  }
 }

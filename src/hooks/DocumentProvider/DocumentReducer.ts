@@ -10,9 +10,9 @@ import {
   Optional,
 } from "src/helper/TypeChecks";
 import { ErrorMessageWrongType } from "src/helper/Error";
-import { TextWidget, Widget } from "src/component/Widget/Model";
-import { UpdateWidgetPosition } from "src/modals/Widget";
 import { ActionResult, DocumentAction } from "./Action";
+import { UpdateWidgetPosition } from "src/modals/UpdateWidgetPosition";
+import { Widget, TextWidget } from "src/modals/Widget";
 
 const updateObject = (
   oldState: DocumentState,
@@ -53,7 +53,7 @@ function updateItemInWidgets(
   return updatedItems;
 }
 
-const addWidget = (
+export const addWidget = (
   state: DocumentState,
   action: DocumentAction
 ): DocumentState => {

@@ -2,14 +2,14 @@ import { Box, List, ListItem } from "@chakra-ui/react";
 import React, { FC, useContext, useEffect } from "react";
 import { Sheet } from "src/hooks/DocumentProvider/Model";
 import ImageLoader from "../../util/ImageLoader";
-import { TextWidget, Widget } from "../Widget/Model";
 import ReactCursorPosition from "react-cursor-position";
 import TextWidgetView from "./TextWidgetView";
 import { DocumentReducerContext } from "src/hooks/DocumentProvider";
 import { DocumentAction } from "src/hooks/DocumentProvider/Action";
 import { createActionResult } from "src/helper/Factories";
 import { ActionType } from "src/hooks/DocumentProvider/Types";
-import { Position } from "src/modals/Widget";
+import { Position } from "src/modals/Position";
+import { TextWidget, Widget } from "src/modals/Widget";
 
 interface IProps {
   sheet: Sheet;
