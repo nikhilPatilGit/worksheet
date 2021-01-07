@@ -41,17 +41,7 @@ export const HomeWorkView = () => {
               src="https://bit.ly/sage-adebayo"
               alt="Segun Adebayo"
             />
-          </Center>
-          <Center>
-            <Image
-              boxSize="100px"
-              objectFit="cover"
-              src="https://bit.ly/sage-adebayo"
-              alt="Segun Adebayo"
-              draggable="true"
-            />
-          </Center>
-          
+          </Center>          
         </VStack>
       </Grid>
     </Flex>

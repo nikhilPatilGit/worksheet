@@ -22,7 +22,7 @@ const SheetView: FC<IProps> = ({ ...props }) => {
         DocumentReducerContext
       );
   useEffect(() => {
-    //console.log(props.position);
+    
   });
 
   const widgetsList = props.sheet.widgets.map((widget: TextWidget) => (
@@ -41,12 +41,13 @@ const SheetView: FC<IProps> = ({ ...props }) => {
   return (
     <Box
       draggable="false"
-      onDrop={(event) => {
+      onDrop={(event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
-        console.log(event.clientX);
-        console.log(event.clientY);
+        const el = event.target as HTMLElement;
+        let offsetX = event.clientX - el.getBoundingClientRect().left;
+        let offsetY = event.clientY - el.getBoundingClientRect().top;
         let textWidget: TextWidget = new TextWidget();
-        textWidget.position = new Position(props.position.x-100, props.position.y-20);
+        textWidget.position = new Position(offsetX - 100, offsetY - 20);
         textWidget.inputText = "Dummy";        
           dispatch(createActionResult<Widget>(ActionType.AddWidget, textWidget));
       }}
