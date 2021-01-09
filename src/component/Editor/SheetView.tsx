@@ -1,6 +1,6 @@
 import { Box, List, ListItem } from "@chakra-ui/react";
 import React, { FC, useContext, useEffect } from "react";
-import { Sheet } from "src/hooks/DocumentProvider/Model";
+import { Sheet } from "src/hooks/DocumentProvider/Sheet";
 import ImageLoader from "../../util/ImageLoader";
 import ReactCursorPosition from "react-cursor-position";
 import TextWidgetView from "./TextWidgetView";
