@@ -1,12 +1,8 @@
 import {
   FirestoreDataConverter,
-  QuerySnapshot,
-  QueryDocumentSnapshot,
-  DocumentData,
   DocumentSnapshot,
 } from "@firebase/firestore-types";
 import { db } from "src/config/firebase";
-import { typeCheckObject } from "src/helper/TypeChecks";
 
 export const storeDocumentInCollection = async <T>(
   collectionPath: string,
@@ -14,9 +10,6 @@ export const storeDocumentInCollection = async <T>(
   genericObject: T,
   converter: FirestoreDataConverter<T>
 ): Promise<void> => {
-
-  console.log(typeCheckObject(genericObject, {"_inputText":"Nikhil"}));
-
   return await db
     .collection(collectionPath)
     .doc(id)
@@ -24,6 +17,19 @@ export const storeDocumentInCollection = async <T>(
     .set(genericObject)
     .then(() => console.log("successfully written"))
     .catch((error) => console.log(error));
+};
+
+export const updateDocumentInCollection = async <T>(
+  collectionPath: string,
+  id: string,
+  genericObject: T
+): Promise<void> => {
+  await db
+    .collection(collectionPath)
+    .doc(id)
+    .update(genericObject)
+    .then(() => console.log("Document successfully updated!"))
+    .catch((error) => console.error("Error updating document: ", error));
 };
 
 export const getDocumentById = async <T>(
