@@ -1,7 +1,8 @@
 import { Reducer } from "react";
 import { ActionType } from "./Types";
 import { DocumentState } from "./DocumentState";
-import { Sheet, SheetIndex } from "./Model";
+import { SheetIndex } from "../../modals/SheetIndex";
+import { Sheet } from "../../modals/Sheet";
 import { MapActionState } from "./Types";
 import {
   isSheet,

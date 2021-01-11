@@ -18,8 +18,16 @@ export abstract class Widget {
     this._widgetType = widgetType;
   }
 
+  set widgetType(widgetType: WidgetType) {
+    this._widgetType = widgetType;
+  }
+
   get widgetType(): WidgetType {
     return this._widgetType;
+  }
+
+  set widgetId(widgetId: string) {
+    this._widgetId = widgetId;
   }
 
   get widgetId(): string {

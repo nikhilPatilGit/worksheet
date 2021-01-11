@@ -1,4 +1,4 @@
-import { Sheet } from "./Model";
+import { Sheet } from "../../modals/Sheet";
 
 export type DocumentState = {
   currentSheetId?: string;

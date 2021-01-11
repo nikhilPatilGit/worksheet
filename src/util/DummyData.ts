@@ -1,5 +1,5 @@
 import { DocumentState } from "src/hooks/DocumentProvider/DocumentState";
-import { Sheet } from "src/hooks/DocumentProvider/Model";
+import { Sheet } from "src/modals/Sheet";
 import { Position } from "src/modals/Position";
 import { TextWidget, ImageWidget } from "src/modals/Widget";
 

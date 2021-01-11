@@ -6,7 +6,7 @@ import { initialDocumentState } from "src/util/DummyData";
 import { DocumentAction } from "./Action";
 import { DocumentReducer } from "./DocumentReducer";
 import { DocumentState } from "./DocumentState";
-import { Sheet } from "./Model";
+import { Sheet } from "../../modals/Sheet";
 
 export const DocumentStateContext: Context<DocumentState> = createContext({});
 export const DocumentReducerContext = createContext(

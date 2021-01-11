@@ -2,7 +2,8 @@ import { Widget } from "src/component/Widget/Model";
 import { UpdateWidgetPosition } from "src/modals/Widget";
 import { DocumentAction } from "./Action";
 import { DocumentState } from "./DocumentState";
-import { Sheet, SheetIndex } from "./Model";
+import { SheetIndex } from "../../modals/SheetIndex";
+import { Sheet } from "../../modals/Sheet";
 
 export type MapActionState = Map<
   ActionType,

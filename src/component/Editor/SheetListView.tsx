@@ -2,7 +2,7 @@ import { List, ListItem } from "@chakra-ui/react";
 import React, { FC, useContext } from "react";
 import { DocumentStateContext } from "src/hooks/DocumentProvider";
 import { DocumentState } from "src/hooks/DocumentProvider/DocumentState";
-import { Sheet } from "src/hooks/DocumentProvider/Model";
+import { Sheet } from "src/modals/Sheet";
 
 import ReactCursorPosition from "react-cursor-position";
 import SheetView from "./SheetView";

@@ -1,7 +1,7 @@
 import { Box, Heading, Grid, Text, Button, useToast } from "@chakra-ui/react";
 import React, { FC, useContext, useEffect, useState } from "react";
 import CustomGridItem from "../../../util/CustomGridItem";
-import { auth, googleProvider } from "../../../../config/firebase";
+import { auth, googleProvider } from "../../../config/firebase";
 import { signIn } from "../../../helper/Auth";
 import { AuthState, AuthAction } from "../../../hooks/Auth/AuthActions";
 import {
