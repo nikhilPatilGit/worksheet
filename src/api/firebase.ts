@@ -7,7 +7,7 @@ import { db } from "src/config/firebase";
 export const storeDocumentInCollection = async <T>(
   collectionPath: string,
   id: string,
-  genericObject: T,
+  genericObject: T, 
   converter: FirestoreDataConverter<T>
 ): Promise<void> => {
   return await db
@@ -15,8 +15,10 @@ export const storeDocumentInCollection = async <T>(
     .doc(id)
     .withConverter(converter)
     .set(genericObject)
-    .then(() => console.log("successfully written"))
-    .catch((error) => console.log(error));
+    .then(() => console.log(`Document successfully stored at ${collectionPath}`))
+    .catch((error) => {
+      throw new Error(`Failed to store document at ${collectionPath} : ${error}`);
+    });
 };
 
 export const updateDocumentInCollection = async <T>(
@@ -28,8 +30,10 @@ export const updateDocumentInCollection = async <T>(
     .collection(collectionPath)
     .doc(id)
     .update(genericObject)
-    .then(() => console.log("Document successfully updated!"))
-    .catch((error) => console.error("Error updating document: ", error));
+    .then(() => console.log(`Document updated successfully at ${collectionPath}`))
+    .catch((error) => {
+      throw new Error(`Failed to update document at ${collectionPath} : ${error}`);
+    });
 };
 
 export const getDocumentById = async <T>(
@@ -45,7 +49,11 @@ export const getDocumentById = async <T>(
     .then((doc: DocumentSnapshot<T>) => {
       if (doc.exists) {
         return doc.data();
+      }else {
+        throw new Error(`Document doesn't exist at ${collectionPath}`);
       }
+    }).catch((error) => {
+      throw new Error(`Failed to get document from ${collectionPath} : ${error}`);
     });
 };
 
@@ -57,6 +65,8 @@ export const deleteDocumentById = async (
     .collection(collectionPath)
     .doc(id)
     .delete()
-    .then(() => console.log("Document successfully deleted!"))
-    .catch((error) => console.error("Error removing document: ", error));
+    .then(() => console.log(`Document successfully deleted from ${collectionPath}`))
+    .catch((error) => {
+      throw new Error(`Failed to delete document from ${collectionPath} : ${error}`);
+    });
 };

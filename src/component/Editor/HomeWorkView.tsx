@@ -32,7 +32,7 @@ export const HomeWorkView = () => {
     //storeDocumentInCollection<TextWidget>("sheets/sheet-id-1/widgets", t.widgetId, t, textWidgetConverter);
 
     (async ()=>{
-      // console.log(await getDocumentById<TextWidget>("sheets/sheet-id-1/widgets", "04IxGo82XNtCQYGEzu42", textWidgetConverter));
+       // console.log(await getDocumentById<TextWidget>("sheets/sheet-id-1/widgets", "12e94606-8ef5-4245-a415-0800cf63e870", textWidgetConverter));
     })();
 
     
