@@ -13,6 +13,7 @@ import { TextWidget } from "src/modals/Widget";
 import { Position } from "src/modals/Position";
 import { getDocumentById, storeDocumentInCollection } from "src/api/firebase";
 import { isObjectKeyPresent } from "src/helper/TypeChecks";
+import { TestGet, TestPost } from "src/api/pdfService";
 
 export const HomeWorkView = () => {
   const state: DocumentState = useContext(DocumentStateContext);
@@ -32,6 +33,8 @@ export const HomeWorkView = () => {
     //storeDocumentInCollection<TextWidget>("sheets/sheet-id-1/widgets", t.widgetId, t, textWidgetConverter);
 
     (async ()=>{
+      await TestPost();
+      // await TestGet();
        // console.log(await getDocumentById<TextWidget>("sheets/sheet-id-1/widgets", "12e94606-8ef5-4245-a415-0800cf63e870", textWidgetConverter));
     })();
 
