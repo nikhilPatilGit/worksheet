@@ -8,6 +8,7 @@ import {
   AuthStateContext,
   AuthReducerContext,
 } from "src/hooks/Auth/AuthProvider";
+import SignIn from "../../SignIn";
 
 const MenuItems = ({ children }) => (
   <Text mt={{ base: 4, md: 0 }} mr={6} display="block">
@@ -57,9 +58,13 @@ const LandingPageNavBar: FC = ({ ...props }) => {
         gridAreaM={gridValues.drawerIcon}
         gridAreaD={gridValues.drawerIcon}
       >
-        <Button colorScheme="blue" onClick={() => {}}>
-          Google
-        </Button>
+        <SignIn>
+          {(signIn) => (
+              <Button colorScheme="blue" onClick={() => signIn()}>
+                Google
+              </Button>
+          )}
+        </SignIn>
       </CustomGridItem>
 
       <CustomGridItem
