@@ -10,11 +10,6 @@ export const TestGet = async () => {
 
 export const TestPost = async () => {
 
-  auth.currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
-    console.log(idToken);
-  }).catch(function(error) {
-    console.log(error);
-  });
 
   // return await fetch("http://localhost:8080/helloPost", {
   //   method: "POST",

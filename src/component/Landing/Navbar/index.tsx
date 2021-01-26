@@ -58,7 +58,7 @@ const LandingPageNavBar: FC = ({ ...props }) => {
         gridAreaD={gridValues.drawerIcon}
       >
         <Button colorScheme="blue" onClick={() => {}}>
-          Button
+          Google
         </Button>
       </CustomGridItem>
 

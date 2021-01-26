@@ -5,8 +5,7 @@ import Layout from "../src/component/Landing/Layout";
 import LandingPageNavBar from "../src/component/Landing/Navbar";
 
 const Home: FC = ({ ...props }) => {
-  console.log(process.env.NEXT_PUBLIC_ANALYTICS_ID);
-  
+
   return (
     <Layout>
         This is the Landing Page

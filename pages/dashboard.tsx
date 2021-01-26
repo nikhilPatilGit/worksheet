@@ -1,4 +1,4 @@
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Center, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import ReactCursorPosition from 'react-cursor-position';
 
@@ -21,28 +21,32 @@ const Dashboard = ({...props}) => {
         } = {}
       } = props;
 
-    const handleMouseMove = (event: MouseEvent) => {
+    const handleImageUpload = async (event) => {
+      const files = event.target.files;
+      let formData = new FormData();
+      formData.append('file', files[0]);
+
+      await fetch('http://localhost:8080/uploadFile', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+      })
+      .catch(error => {
+        console.error(error)
+      })
+
         console.log(event.movementX);
         console.log(event.movementY);        
     }
 
   return (
-    <Box position="relative" w="300px" h="300px">       
-        <Image
-        position="absolute"
-        top="0"
-        left="0"
-        src="https://bit.ly/sage-adebayo" alt="Segun Adebayo" />        
-        <Text position="absolute" zIndex="9">
-        {`x: ${x}`}<br />
-      {`y: ${y}`}<br />
-      {`width:: ${width}`}<br />
-      {`height: ${height}`}<br />
-      {`isActive: ${isActive}`}<br />
-      {`isPositionOutside: ${isPositionOutside ? 'true' : 'false'}`}<br />
-      {`isMouseDetected: ${isMouseDetected ? 'true' : 'false'}`}<br />
-            {`isTouchDetected: ${isTouchDetected ? 'true' : 'false'}`}
-      </Text>       
+    <Box>       
+          <Center>
+            <input onChange={handleImageUpload} type="file" id="fileUpload" />
+          </Center>
     </Box>
   );
 };
