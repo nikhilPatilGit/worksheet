@@ -10,6 +10,7 @@ export const onAuthStateChanged = (dispatch: React.Dispatch<Action>): firebase.U
     return auth.onAuthStateChanged((user) => {
         if (user) {
             let currentUser: User = new User(user.uid, user.displayName, user.email, user.photoURL);
+            localStorage.setItem("isAuthenticated", "true");
             dispatch(createActionResult<User>(ActionType.SignIn, currentUser));
         }
     }, (error) => {
@@ -19,8 +20,8 @@ export const onAuthStateChanged = (dispatch: React.Dispatch<Action>): firebase.U
     });
 }
 
-export const signInWithGoogle = async (dispatch: React.Dispatch<Action>): Promise<void>  => {
-     return auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((result) => {
+export const signInWithGoogle = async (dispatch: React.Dispatch<Action>)  => {
+    auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((result) => {
          if(result.user){
              let user = result.user;
              let currentUser: User = new User(user.uid, user.displayName, user.email, user.photoURL);

@@ -3,6 +3,12 @@ import { AuthReducer } from "./AuthReducer";
 import {AuthState, InitialAuthState} from "./AuthState";
 import {Action} from "../Common/Action";
 import {onAuthStateChanged} from "../../api/firebaseAuth";
+import {auth} from "../../config/firebase";
+import {User} from "../../modals/User";
+import {createActionResult} from "../../helper/Factories";
+import {ActionType} from "../Common/Types";
+import { useRouter } from 'next/router'
+import {RouteMapper} from "../../util/RouteRedirectMapper";
 
 export const AuthStateContext: Context<AuthState> = createContext(
     InitialAuthState
@@ -16,10 +22,15 @@ export const AuthReducerContext = createContext(
       AuthReducer,
       InitialAuthState
     );
+    const router = useRouter();
 
   useEffect(() => {
-    console.log("Inside Auth Stated");
-    return () => onAuthStateChanged(dispatch);
+    RouteMapper(localStorage.getItem("isAuthenticated") === "true", router);
+  }, [state.currentUser])
+
+  useEffect(() => {
+    console.log(router);
+    return onAuthStateChanged(dispatch);
   }, []);
   
     return (

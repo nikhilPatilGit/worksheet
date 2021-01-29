@@ -1,6 +1,7 @@
 import { Box, Center, Image, Text } from "@chakra-ui/react";
-import React from "react";
+import React, {useEffect} from "react";
 import ReactCursorPosition from 'react-cursor-position';
+import {useRouter} from "next/router";
 
 const Dashboard = ({...props}) => {
 
@@ -41,6 +42,11 @@ const Dashboard = ({...props}) => {
         console.log(event.movementX);
         console.log(event.movementY);        
     }
+
+    const router = useRouter();
+    useEffect(()=>{
+        console.log(router);
+    });
 
   return (
     <Box>       
