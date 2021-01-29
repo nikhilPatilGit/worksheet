@@ -1,14 +1,18 @@
-import { Widget } from "src/component/Widget/Model";
-import { UpdateWidgetPosition } from "src/modals/Widget";
-import { DocumentAction } from "./Action";
-import { DocumentState } from "./DocumentState";
+import { DocumentState } from "../DocumentProvider/DocumentState";
 import { SheetIndex } from "../../modals/SheetIndex";
 import { Sheet } from "../../modals/Sheet";
+import {Action} from "./Action";
+import {AuthState} from "../Auth/AuthState";
 
-export type MapActionState = Map<
+export type MapDocumentActionState = Map<
   ActionType,
-  (state: DocumentState, action: DocumentAction) => DocumentState
+  (state: DocumentState, action: Action) => DocumentState
 >;
+
+export type MapAuthActionState = Map<
+    ActionType,
+    (state: AuthState, action: Action) => AuthState
+    >;
 
 export enum ActionType {
   AddNewSheet,
@@ -17,7 +21,11 @@ export enum ActionType {
   DeleteSheet,
   DeleteWidget,
   UpdatePosition,
-  UpdateTextWidget
+  UpdateTextWidget,
+  SignIn,
+  SignOut,
+  UpdateUser,
+  ErrorThrown
 };
 
 // export type DocumentAction =

@@ -1,7 +1,7 @@
 import { Input } from "@chakra-ui/react";
 import React, { FC, useContext, useEffect, useState } from "react";
 import { DocumentReducerContext } from "src/hooks/DocumentProvider";
-import { DocumentAction } from "src/hooks/DocumentProvider/Action";
+import { DocumentAction } from "src/hooks/Common/Action";
 import { TextWidget } from "../Widget/Model";
 
 interface IProps {

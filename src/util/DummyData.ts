@@ -2,6 +2,7 @@ import { DocumentState } from "src/hooks/DocumentProvider/DocumentState";
 import { Sheet } from "src/modals/Sheet";
 import { Position } from "src/modals/Position";
 import { TextWidget, ImageWidget } from "src/modals/Widget";
+import {User} from "../modals/User";
 
 export const initialDocumentState = (): DocumentState => {
 
@@ -33,3 +34,5 @@ export const initialDocumentState = (): DocumentState => {
       currentSheetId: "abc"
   };
 }
+
+export const DummyUser: User = new User("10101", "Nikhil", "patil@gmail.com", "");

@@ -1,6 +1,6 @@
 
-import { ActionResult, DocumentAction } from "src/hooks/DocumentProvider/Action";
-import { ActionType } from "src/hooks/DocumentProvider/Types";
+import { ActionResult, Action } from "src/hooks/Common/Action";
+import { ActionType } from "src/hooks/Common/Types";
 import { Widget, WidgetType, TextWidget, ImageWidget } from "src/modals/Widget";
 import { ErrorMessage, ErrorMessageWrongType } from "./Error";
 
@@ -15,7 +15,7 @@ export const createWidgetObject = <T extends Widget>(
   return new widget(arg);
 };
 
-export const createActionResult = <T>(actionResult: ActionType, result: T): DocumentAction => {
+export const createActionResult = <T>(actionResult: ActionType, result?: T): Action => {
   return new ActionResult<T>(actionResult, result);
 };
 

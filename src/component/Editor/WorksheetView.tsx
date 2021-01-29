@@ -1,14 +1,44 @@
-import { Flex, Image, VStack, HStack, Spacer, Button, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverFooter, PopoverHeader, PopoverTrigger, Portal, Text } from "@chakra-ui/react";
+import {
+  Flex,
+  Image,
+  VStack,
+  HStack,
+  Spacer,
+  Button,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverFooter,
+  PopoverHeader,
+  PopoverTrigger,
+  Portal,
+  Text,
+  IconButton
+} from "@chakra-ui/react";
 import React from "react";
 import Link from 'next/link'
 
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import CustomListPopver from "../../util/CustomListPopover";
+import {HiDuplicate, HiTrash} from "react-icons/hi";
 
 const UpdateWorksheet = () => {
   return <Flex w="100%" direction="row" >
-    <Spacer />  
-      <CustomListPopver></CustomListPopver>
+    <Spacer />
+    <CustomListPopver
+        iconPressed={(iconId: string) => console.log(iconId)}
+        icons={[
+          { icon: HiDuplicate, iconName: "Duplicate", iconId: "duplicate" },
+          { icon: HiTrash, iconName: "Delete Worksheet", iconId: "delete" },
+        ]}
+    >
+      <IconButton
+          aria-label="Search database"
+          icon={<BiDotsHorizontalRounded size={24} />}
+      />
+    </CustomListPopver>
     <Spacer />
     <Popover>
   <PopoverTrigger>

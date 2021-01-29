@@ -4,18 +4,17 @@ import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { HiDuplicate, HiTrash } from "react-icons/hi";
 import { createActionResult } from "src/helper/Factories";
 import { DocumentReducerContext } from "src/hooks/DocumentProvider";
-import { DocumentAction } from "src/hooks/DocumentProvider/Action";
-import { ActionType } from "src/hooks/DocumentProvider/Types";
-import { Position, UpdateWidgetPosition } from "src/modals/Widget";
+import { ActionType } from "src/hooks/Common/Types";
 import CustomListPopver from "../../util/CustomListPopover";
+import {Action} from "../../hooks/Common/Action";
 
 const WorksheetToolbar = () => {
-  const dispatch: React.Dispatch<DocumentAction> = useContext(
+  const dispatch: React.Dispatch<Action> = useContext(
     DocumentReducerContext
   );
   const hiddenFileInput = useRef(null);
 
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent) => {
     // dispatch({
     //   type: ActionType.AddNewSheet,
     //   result: {

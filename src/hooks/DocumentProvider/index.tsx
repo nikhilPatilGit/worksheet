@@ -1,20 +1,18 @@
-import { createContext } from "react";
+import React, { createContext } from "react";
 import { Context } from "react";
 import { FC, useReducer, Reducer } from "react";
-import { TextWidget, WidgetType } from "src/component/Widget/Model";
 import { initialDocumentState } from "src/util/DummyData";
-import { DocumentAction } from "./Action";
+import { Action } from "../Common/Action";
 import { DocumentReducer } from "./DocumentReducer";
 import { DocumentState } from "./DocumentState";
-import { Sheet } from "../../modals/Sheet";
 
 export const DocumentStateContext: Context<DocumentState> = createContext({});
 export const DocumentReducerContext = createContext(
-  (() => 0) as React.Dispatch<DocumentAction>
+  (() => 0) as React.Dispatch<Action>
 );
 
 export const DocumentProvider: FC = ({ children }) => {
-  const [state, dispatch] = useReducer<Reducer<DocumentState, DocumentAction>>(
+  const [state, dispatch] = useReducer<Reducer<DocumentState, Action>>(
     DocumentReducer,
     initialDocumentState()
   );

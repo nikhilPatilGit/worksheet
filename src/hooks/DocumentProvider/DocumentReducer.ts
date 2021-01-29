@@ -1,9 +1,9 @@
 import { Reducer } from "react";
-import { ActionType } from "./Types";
+import { ActionType } from "../Common/Types";
 import { DocumentState } from "./DocumentState";
 import { SheetIndex } from "../../modals/SheetIndex";
 import { Sheet } from "../../modals/Sheet";
-import { MapActionState } from "./Types";
+import { MapDocumentActionState } from "../Common/Types";
 import {
   isSheet,
   isSheetArray,
@@ -11,7 +11,7 @@ import {
   Optional,
 } from "src/helper/TypeChecks";
 import { ErrorMessageWrongType } from "src/helper/Error";
-import { ActionResult, DocumentAction } from "./Action";
+import { ActionResult, Action } from "../Common/Action";
 import { UpdateWidgetPosition } from "src/modals/UpdateWidgetPosition";
 import { Widget, TextWidget } from "src/modals/Widget";
 
@@ -56,7 +56,7 @@ function updateItemInWidgets(
 
 export const addWidget = (
   state: DocumentState,
-  action: DocumentAction
+  action: Action
 ): DocumentState => {
   const actionResult: ActionResult<Widget> = action as ActionResult<Widget>;
   if (!(actionResult.result instanceof Widget)) {
@@ -79,7 +79,7 @@ export const addWidget = (
 
 const updateWidgetPostion = (
   state: DocumentState,
-  action: DocumentAction
+  action: Action
 ): DocumentState => {
   const actionResult: ActionResult<UpdateWidgetPosition> = action as ActionResult<UpdateWidgetPosition>;
   if (!(actionResult.result instanceof UpdateWidgetPosition)) {
@@ -103,7 +103,7 @@ const updateWidgetPostion = (
   return state;
 }
 
-const deleteWidget = (state: DocumentState, action: DocumentAction) => {
+const deleteWidget = (state: DocumentState, action: Action) => {
   const actionResult: ActionResult<string> = action as ActionResult<string>;
   const widgetId: string = actionResult.result;
   if (Optional(state.sheets) && Optional(state.currentSheetId)) {
@@ -125,7 +125,7 @@ const deleteWidget = (state: DocumentState, action: DocumentAction) => {
   }
 };
 
-const deleteSheet = (state: DocumentState, action: DocumentAction) => { 
+const deleteSheet = (state: DocumentState, action: Action) => {
   const actionResult: ActionResult<string> = action as ActionResult<string>;
   const sheetId: string = actionResult.result;
   const sheet: Sheet[] = state.sheets;
@@ -139,7 +139,7 @@ const deleteSheet = (state: DocumentState, action: DocumentAction) => {
 
 const addNewSheet = (
   state: DocumentState,
-  action: DocumentAction
+  action: Action
 ): DocumentState => {
   const actionResult: ActionResult<SheetIndex> = action as ActionResult<SheetIndex>;
   if (!isSheet(actionResult.result)) {
@@ -154,7 +154,7 @@ const addNewSheet = (
 
 const addSheetArray = (
   state: DocumentState,
-  action: DocumentAction
+  action: Action
 ): DocumentState => {
   const actionResult: ActionResult<Sheet[]> = action as ActionResult<Sheet[]>;
   if (!isSheetArray(actionResult.result)) {
@@ -163,7 +163,7 @@ const addSheetArray = (
   return updateObject(state, { sheets: actionResult.result });
 };
 
-const updateTextWidget = (state: DocumentState, action: DocumentAction): DocumentState => {
+const updateTextWidget = (state: DocumentState, action: Action): DocumentState => {
   const actionResult: ActionResult<TextWidget> = action as ActionResult<TextWidget>;
   if(!(actionResult.result instanceof TextWidget)){
     throw ErrorMessageWrongType("TextWidget");
@@ -188,17 +188,11 @@ const updateTextWidget = (state: DocumentState, action: DocumentAction): Documen
   return state;
 }
 
-const documentActionLookUpTable = (
-  state: DocumentState,
-  action: DocumentAction,
-  map: MapActionState
-) => (map.has(action.actionType) ? map.get(action.actionType)(state, action) : state);
-
-export const DocumentReducer: Reducer<DocumentState, DocumentAction> = (
+export const DocumentReducer: Reducer<DocumentState, Action> = (
   documentState: DocumentState,
-  documentAction: DocumentAction
+  documentAction: Action
 ) => {
-  let map: MapActionState = new Map([
+  let map: MapDocumentActionState = new Map([
     [ActionType.AddWidget, addWidget],
     [ActionType.AddNewSheet, addNewSheet],
     [ActionType.AddSheetArray, addSheetArray],
@@ -207,6 +201,6 @@ export const DocumentReducer: Reducer<DocumentState, DocumentAction> = (
     [ActionType.UpdatePosition, updateWidgetPostion],
     [ActionType.UpdateTextWidget, updateTextWidget]
   ]);
-  return documentActionLookUpTable({ ...documentState }, documentAction, map);
+  return (map.has(documentAction.actionType) ? map.get(documentAction.actionType)(documentState, documentAction) : documentState);
 };
  

@@ -1,7 +1,6 @@
-import { Widget } from "src/component/Widget/Model";
 import { ActionType } from "./Types";
 
-export abstract class DocumentAction {
+export abstract class Action {
     private _actionType: ActionType
     constructor(actionType: ActionType){
       this._actionType = actionType;
@@ -11,9 +10,9 @@ export abstract class DocumentAction {
     }
 };
 
-export class ActionResult<T> extends DocumentAction{
+export class ActionResult<T> extends Action{
     private _result: T;
-    constructor(actionType: ActionType, result: T){
+    constructor(actionType: ActionType, result?: T){
       super(actionType);
       this._result = result;
     }

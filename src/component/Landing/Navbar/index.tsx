@@ -1,14 +1,15 @@
-import { Box, Heading, Grid, Text, Button, useToast } from "@chakra-ui/react";
+import { Box, Heading, Grid, Text, Button, useToast, SimpleGrid } from "@chakra-ui/react";
 import React, { FC, useContext, useEffect, useState } from "react";
 import CustomGridItem from "../../../util/CustomGridItem";
 import { auth, googleProvider } from "../../../config/firebase";
 import { signIn } from "../../../helper/Auth";
-import { AuthState, AuthAction } from "../../../hooks/Auth/AuthActions";
 import {
   AuthStateContext,
-  AuthReducerContext,
-} from "src/hooks/Auth/AuthProvider";
+  AuthReducerContext, AuthProvider,
+} from "src/hooks/Auth";
 import SignIn from "../../SignIn";
+import {LoginWithGoogle} from "../../SignIn/SocialButtons";
+import {LoginModal} from "../../SignIn/LoginModal";
 
 const MenuItems = ({ children }) => (
   <Text mt={{ base: 4, md: 0 }} mr={6} display="block">
@@ -58,13 +59,9 @@ const LandingPageNavBar: FC = ({ ...props }) => {
         gridAreaM={gridValues.drawerIcon}
         gridAreaD={gridValues.drawerIcon}
       >
-        <SignIn>
-          {(signIn) => (
-              <Button colorScheme="blue" onClick={() => signIn()}>
-                Google
-              </Button>
-          )}
-        </SignIn>
+        <AuthProvider>
+          <LoginModal />
+        </AuthProvider>
       </CustomGridItem>
 
       <CustomGridItem

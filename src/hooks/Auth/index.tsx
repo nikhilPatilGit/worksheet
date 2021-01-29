@@ -1,19 +1,26 @@
-import { Context, createContext, FC, Reducer, useReducer } from "react";
-import { AuthAction, AuthState, InitialAuthState } from "./AuthActions";
+import React, {Context, createContext, FC, Reducer, useEffect, useReducer} from "react";
 import { AuthReducer } from "./AuthReducer";
+import {AuthState, InitialAuthState} from "./AuthState";
+import {Action} from "../Common/Action";
+import {onAuthStateChanged} from "../../api/firebaseAuth";
 
 export const AuthStateContext: Context<AuthState> = createContext(
     InitialAuthState
   );
 export const AuthReducerContext = createContext(
-    (() => 0) as React.Dispatch<AuthAction>
+    (() => 0) as React.Dispatch<Action>
   );
 
   export const AuthProvider: FC = ({ children }) => {
-    const [state, dispatch] = useReducer<Reducer<AuthState, AuthAction>>(
+    const [state, dispatch] = useReducer<Reducer<AuthState, Action>>(
       AuthReducer,
       InitialAuthState
     );
+
+  useEffect(() => {
+    console.log("Inside Auth Stated");
+    return () => onAuthStateChanged(dispatch);
+  }, []);
   
     return (
       <AuthReducerContext.Provider value={dispatch}>

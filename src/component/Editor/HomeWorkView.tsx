@@ -8,7 +8,6 @@ import { DocumentState } from "src/hooks/DocumentProvider/DocumentState";
 import WorksheetToolbar from "./WorksheetToolbar";
 
 import { SheetListView } from "./SheetListView";
-import { testWidgetConverter, textWidgetConverter } from "src/converters/WidgetConverter";
 import { TextWidget } from "src/modals/Widget";
 import { Position } from "src/modals/Position";
 import { getDocumentById, storeDocumentInCollection } from "src/api/firebase";

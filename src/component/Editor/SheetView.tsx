@@ -5,9 +5,9 @@ import ImageLoader from "../../util/ImageLoader";
 import ReactCursorPosition from "react-cursor-position";
 import TextWidgetView from "./TextWidgetView";
 import { DocumentReducerContext } from "src/hooks/DocumentProvider";
-import { DocumentAction } from "src/hooks/DocumentProvider/Action";
+import { DocumentAction } from "src/hooks/Common/Action";
 import { createActionResult } from "src/helper/Factories";
-import { ActionType } from "src/hooks/DocumentProvider/Types";
+import { ActionType } from "src/hooks/Common/Types";
 import { Position } from "src/modals/Position";
 import { TextWidget, Widget } from "src/modals/Widget";
 

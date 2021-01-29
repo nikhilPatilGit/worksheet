@@ -22,5 +22,5 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 const now = firebase.firestore.Timestamp.now();
 const storage = firebase.storage();
-export { auth, db, now, storage, googleProvider };
+export { firebase, auth, db, now, storage, googleProvider };
 console.log(app.name ? 'Firebase Mode Activated!' : 'Firebase not working :(');
