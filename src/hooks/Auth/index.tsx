@@ -1,43 +1,45 @@
-import React, {Context, createContext, FC, Reducer, useEffect, useReducer} from "react";
+import React, {Context, createContext, FC, Reducer, useContext, useEffect, useReducer, useState} from "react";
 import { AuthReducer } from "./AuthReducer";
 import {AuthState, InitialAuthState} from "./AuthState";
 import {Action} from "../Common/Action";
-import {onAuthStateChanged} from "../../api/firebaseAuth";
-import {auth} from "../../config/firebase";
-import {User} from "../../modals/User";
-import {createActionResult} from "../../helper/Factories";
-import {ActionType} from "../Common/Types";
-import { useRouter } from 'next/router'
-import {RouteMapper} from "../../util/RouteRedirectMapper";
+import nookies from 'nookies';
+import {firebase} from "../../config/firebase";
 
-export const AuthStateContext: Context<AuthState> = createContext(
-    InitialAuthState
-  );
-export const AuthReducerContext = createContext(
-    (() => 0) as React.Dispatch<Action>
-  );
+const AuthContext = createContext<{ user: firebase.User | null }>({
+  user: null,
+});
 
-  export const AuthProvider: FC = ({ children }) => {
-    const [state, dispatch] = useReducer<Reducer<AuthState, Action>>(
-      AuthReducer,
-      InitialAuthState
-    );
-    const router = useRouter();
+export const AuthProvider: FC = ({ children }) => {
+    const [user, setUser] = useState<firebase.User | null>(null);
 
-  useEffect(() => {
-    RouteMapper(localStorage.getItem("isAuthenticated") === "true", router);
-  }, [state.currentUser])
+    useEffect(() => {
+      return firebase.auth().onIdTokenChanged(async (user) => {
+        if (!user) {
+          setUser(null);
+          nookies.set(undefined, 'token', '');
+        } else {
+          const token = await user.getIdToken();
+          setUser(user);
+          nookies.set(undefined, 'token', token);
+        }
+      });
+    }, []);
 
-  useEffect(() => {
-    console.log(router);
-    return onAuthStateChanged(dispatch);
-  }, []);
-  
+    useEffect(() => {
+      const handle = setInterval(async () => {
+        const user = firebase.auth().currentUser;
+        if (user) await user.getIdToken(true);
+      }, 10 * 60 * 1000);
+
+      // clean up setInterval
+      return () => clearInterval(handle);
+    }, []);
+
     return (
-      <AuthReducerContext.Provider value={dispatch}>
-        <AuthStateContext.Provider value={state}>
-          {children}
-        </AuthStateContext.Provider>
-      </AuthReducerContext.Provider>
+        <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
     );
   };
+
+export const useAuth = () => {
+  return useContext(AuthContext);
+};

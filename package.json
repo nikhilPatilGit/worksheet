@@ -35,7 +35,9 @@
     "react-image": "^4.0.3",
     "react-textarea-autosize": "^8.3.0",
     "use-combined-reducers": "^1.0.4",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "firebase-admin": "^9.4.2",
+    "nookies": "^2.5.2"
   },
   "devDependencies": {
     "@types/jest": "^26.0.19",

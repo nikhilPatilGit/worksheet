@@ -13,14 +13,8 @@ export const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
-if (!firebase.apps.length) {
+if (typeof window !== 'undefined' && !firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
+  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
 }
-const app = firebase.app();
-const googleProvider = new firebase.auth.GoogleAuthProvider();
-const auth = firebase.auth();
-const db = firebase.firestore();
-const now = firebase.firestore.Timestamp.now();
-const storage = firebase.storage();
-export { firebase, auth, db, now, storage, googleProvider };
-console.log(app.name ? 'Firebase Mode Activated!' : 'Firebase not working :(');
+export { firebase };

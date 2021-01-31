@@ -1,9 +1,16 @@
 import { Box, Center, Image, Text } from "@chakra-ui/react";
 import React, {useEffect} from "react";
 import ReactCursorPosition from 'react-cursor-position';
-import {useRouter} from "next/router";
+import {useRequireAuth} from "../src/hooks/Auth/AuthRequire";
+import {useAuth} from "../src/hooks/Auth";
 
 const Dashboard = ({...props}) => {
+
+    const {user} = useAuth();
+
+    useEffect(() => {
+        console.log(user);
+    });
 
     const {
         detectedEnvironment: {
@@ -42,11 +49,6 @@ const Dashboard = ({...props}) => {
         console.log(event.movementX);
         console.log(event.movementY);        
     }
-
-    const router = useRouter();
-    useEffect(()=>{
-        console.log(router);
-    });
 
   return (
     <Box>       

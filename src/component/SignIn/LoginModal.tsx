@@ -16,27 +16,21 @@ import {LoginWithGoogle} from "./SocialButtons";
 import {signInWithGoogle} from "../../api/firebaseAuth";
 import React, {useContext, useEffect} from "react";
 import {Action} from "../../hooks/Common/Action";
-import {AuthReducerContext, AuthStateContext} from "../../hooks/Auth";
 import {ActionType} from "../../hooks/Common/Types";
 import {createActionResult} from "../../helper/Factories";
 import {AuthState} from "../../hooks/Auth/AuthState";
 import {DocumentState} from "../../hooks/DocumentProvider/DocumentState";
 import {DocumentStateContext} from "../../hooks/DocumentProvider";
+import {useRouter} from "next/router";
+import {firebase} from "../../config/firebase";
 
 export const LoginModal = () => {
-    const dispatch: React.Dispatch<Action> = useContext(
-        AuthReducerContext
-    );
-    const state: AuthState = useContext(AuthStateContext);
 
     const {isOpen, onOpen, onClose} = useDisclosure();
 
     const primaryColor = "primary.green";
     const primaryLightColor = "primary.lightGreen";
-
-    useEffect(() => {
-        console.log(state);
-    });
+    const router = useRouter();
 
     return (
         <>
@@ -85,8 +79,11 @@ export const LoginModal = () => {
                     <ModalBody>
                         <Grid gap={2}>
                             <Link
-                                onClick={() => {
-                                    signInWithGoogle(dispatch);
+                                onClick={async () => {
+                                    await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).finally(() => {
+                                        onClose();
+                                        router.push("/dashboard");
+                                    });
                                 }}
                             >
                                 <LoginWithGoogle />

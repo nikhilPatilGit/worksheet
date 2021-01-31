@@ -2,6 +2,7 @@ import { AppProps } from "next/app";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import React from "react";
 import { Portal, PortalManager } from "@chakra-ui/portal"
+import {AuthProvider} from "../src/hooks/Auth";
 
 const colors = {
   brand: {
@@ -32,7 +33,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme} resetCSS={true}>
       <PortalManager>
+          {/*<AuthProvider>*/}
           <Component {...pageProps} />
+          {/*</AuthProvider>*/}
       </PortalManager>
     </ChakraProvider>
   );
