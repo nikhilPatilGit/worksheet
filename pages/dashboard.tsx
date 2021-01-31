@@ -3,31 +3,41 @@ import React, {useEffect} from "react";
 import ReactCursorPosition from 'react-cursor-position';
 import {useRequireAuth} from "../src/hooks/Auth/AuthRequire";
 import {useAuth} from "../src/hooks/Auth";
+import {firebase} from "../src/config/firebase";
 
-const Dashboard = ({...props}) => {
+import { InferGetServerSidePropsType, GetServerSidePropsContext } from "next";
+import nookies from "nookies";
+import {firebaseAdmin} from "../src/config/firebaseAdmin";
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+    try {
+        const cookies = nookies.get(ctx);
+        const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
+        const { uid, email } = token;
+
+        return {
+            props: { message: `Your email is ${email} and your UID is ${uid}.` },
+        };
+    } catch (err) {
+
+        return {
+            redirect: {
+                permanent: false,
+                destination: "/",
+            },
+
+            props: {} as never,
+        };
+    }
+};
+
+const Dashboard = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
     const {user} = useAuth();
 
     useEffect(() => {
         console.log(user);
     });
-
-    const {
-        detectedEnvironment: {
-          isMouseDetected = false,
-          isTouchDetected = false
-        } = {},
-        elementDimensions: {
-          width = 0,
-          height = 0
-        } = {},
-        isActive = false,
-        isPositionOutside = false,
-        position: {
-          x = 0,
-          y = 0
-        } = {}
-      } = props;
 
     const handleImageUpload = async (event) => {
       const files = event.target.files;

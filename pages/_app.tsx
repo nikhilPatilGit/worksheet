@@ -33,9 +33,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme} resetCSS={true}>
       <PortalManager>
-          {/*<AuthProvider>*/}
+          <AuthProvider>
           <Component {...pageProps} />
-          {/*</AuthProvider>*/}
+          </AuthProvider>
       </PortalManager>
     </ChakraProvider>
   );

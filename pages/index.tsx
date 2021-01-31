@@ -19,7 +19,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
         ctx.res.end();
 
         return {
-            props: { message: `Your name is ${name} email is ${email} and your UID is ${uid}.` },
+            props: {},
         };
     } catch (err) {
         return { props: {} as never };
@@ -29,7 +29,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 const Home = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <Layout>
-        This is the Landing Page {props.message}
+        This is the Landing Page
     </Layout>
   );
 };

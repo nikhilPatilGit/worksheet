@@ -81,7 +81,6 @@ export const LoginModal = () => {
                             <Link
                                 onClick={async () => {
                                     await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).finally(() => {
-                                        onClose();
                                         router.push("/dashboard");
                                     });
                                 }}
