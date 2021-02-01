@@ -44,9 +44,10 @@ const LandingPageNavBar: FC = ({ ...props }) => {
       templateColumns="repeat(7, 130px)"
       bg="#303a4e"
       gridGap={2}
+      m={2}
     >
       <CustomGridItem gridAreaM={gridValues.logo} gridAreaD={gridValues.logo}>
-        <NavText text={"EASIFIE"} size={"2xl"} />
+        <NavText text={"EASIFIE"} size={"3xl"} fontFamily={"Roboto"} />
       </CustomGridItem>
 
       <CustomGridItem
@@ -79,7 +80,7 @@ const LandingPageNavBar: FC = ({ ...props }) => {
         gridAreaM={gridValues.menuItem1M}
         gridAreaD={gridValues.menuItem1D}
       >
-        <NavText text={"What is Easifie"} size={"md"} />
+        <NavText text={"What is Easifie?"} size={"md"}  />
       </CustomGridItem>
 
       <CustomGridItem
@@ -87,7 +88,7 @@ const LandingPageNavBar: FC = ({ ...props }) => {
         gridAreaM={gridValues.menuItem2M}
         gridAreaD={gridValues.menuItem2D}
       >
-        <NavText text={"Demo"} size={"md"} />
+        <NavText text={"Demo"} size={"md"}/>
       </CustomGridItem>
 
       <CustomGridItem
@@ -95,7 +96,7 @@ const LandingPageNavBar: FC = ({ ...props }) => {
         gridAreaM={gridValues.menuItem3M}
         gridAreaD={gridValues.menuItem3D}
       >
-        <NavText text={"Dashboard"} size={"md"} />
+        <NavText text={"Dashboard"} size={"md"}/>
       </CustomGridItem>
 
     </Grid>

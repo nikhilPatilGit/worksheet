@@ -10,9 +10,7 @@ const Layout: FC = ({ ...props }) => {
       <Head>
         <title>Worksheet</title>
       </Head>
-        <Box p={2}>
-            <LandingPageNavBar />
-        </Box>
+      <LandingPageNavBar />
       <Flex bg="#1A202C" grow={1}>
         {props.children}  
       </Flex>

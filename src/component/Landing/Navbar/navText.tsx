@@ -4,10 +4,12 @@ import CustomGridItem from "../../../util/CustomGridItem";
 
 interface IProps {
     text: string;
-    size: string
+    size: string;
+    fontFamily?: string;
 }
 export const NavText: FC<IProps> = ({...props}) => {
     return <Text
+        fontFamily={props.fontFamily}        
         align="center"
         fontWeight="bold"
         fontSize={props.size}
