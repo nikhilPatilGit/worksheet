@@ -1,4 +1,4 @@
-import { Box, Flex, Spacer, StackDivider, VStack } from "@chakra-ui/react";
+import { Box, Center, Flex, Spacer, StackDivider, VStack } from "@chakra-ui/react";
 import Head from "next/head";
 import React, { FC } from "react";
 import Footer from "../Footer";
@@ -6,12 +6,14 @@ import LandingPageNavBar from "../Navbar";
 
 const Layout: FC = ({ ...props }) => {
   return (
-    <Flex minH="100vh" direction="column">
+    <Flex bg="#1A202C" minH="100vh" direction="column">
       <Head>
         <title>Worksheet</title>
       </Head>
-      <LandingPageNavBar />
-      <Flex grow={1}>
+        <Box p={2}>
+            <LandingPageNavBar />
+        </Box>
+      <Flex bg="#1A202C" grow={1}>
         {props.children}  
       </Flex>
       <Footer />

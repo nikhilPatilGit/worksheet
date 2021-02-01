@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import {Box, Center, Flex } from "@chakra-ui/react";
 import Head from "next/head";
 import React, { FC } from "react";
 import Layout from "../src/component/Landing/Layout";
@@ -15,8 +15,8 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
         // the user is authenticated!
         const { uid, email, name } = token;
 
-        ctx.res.writeHead(302, { Location: '/dashboard' });
-        ctx.res.end();
+        // ctx.res.writeHead(302, { Location: '/dashboard' });
+        // ctx.res.end();
 
         return {
             props: {},
@@ -29,9 +29,13 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 const Home = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <Layout>
-        This is the Landing Page
+            Landing Area
     </Layout>
   );
 };
 
 export default Home;
+
+// <Box
+//     bg={"#1A202C"}
+// >This is the landing page</Box>

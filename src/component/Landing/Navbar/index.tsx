@@ -1,8 +1,9 @@
-import { Box, Heading, Grid, Text, Button, useToast, SimpleGrid } from "@chakra-ui/react";
+import { Box, Heading, Grid, Text, Button, useToast, SimpleGrid, Image } from "@chakra-ui/react";
 import React, { FC, useContext, useEffect, useState } from "react";
 import CustomGridItem from "../../../util/CustomGridItem";
 import {LoginModal} from "../../SignIn/LoginModal";
 import {useAuth} from "../../../hooks/Auth";
+import {NavText} from "./navText";
 
 const MenuItems = ({ children }) => (
   <Text mt={{ base: 4, md: 0 }} mr={6} display="block">
@@ -13,6 +14,8 @@ const MenuItems = ({ children }) => (
 const LandingPageNavBar: FC = ({ ...props }) => {
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
+
+  // row-start/col-start/row-end/col-end
 
   const gridValues = {
     logo: "1/1/1/2",
@@ -32,19 +35,18 @@ const LandingPageNavBar: FC = ({ ...props }) => {
 
   return (
     <Grid
-      padding={2}
       templateRows={[
         show ? "repeat(5, 1fr)" : "1",
         "repeat(5, 1fr)",
-        "1fr",
-        "1fr",
+        "50px",
+        "50px",
       ]}
-      templateColumns="repeat(12, 1fr)"
-      bg="tomato"
+      templateColumns="repeat(7, 130px)"
+      bg="#303a4e"
       gridGap={2}
     >
       <CustomGridItem gridAreaM={gridValues.logo} gridAreaD={gridValues.logo}>
-        Logo
+        <NavText text={"EASIFIE"} size={"2xl"} />
       </CustomGridItem>
 
       <CustomGridItem
@@ -77,7 +79,7 @@ const LandingPageNavBar: FC = ({ ...props }) => {
         gridAreaM={gridValues.menuItem1M}
         gridAreaD={gridValues.menuItem1D}
       >
-        Why Worksheet
+        <NavText text={"What is Easifie"} size={"md"} />
       </CustomGridItem>
 
       <CustomGridItem
@@ -85,7 +87,7 @@ const LandingPageNavBar: FC = ({ ...props }) => {
         gridAreaM={gridValues.menuItem2M}
         gridAreaD={gridValues.menuItem2D}
       >
-        Solutions
+        <NavText text={"Demo"} size={"md"} />
       </CustomGridItem>
 
       <CustomGridItem
@@ -93,7 +95,7 @@ const LandingPageNavBar: FC = ({ ...props }) => {
         gridAreaM={gridValues.menuItem3M}
         gridAreaD={gridValues.menuItem3D}
       >
-        Pricing
+        <NavText text={"Dashboard"} size={"md"} />
       </CustomGridItem>
 
     </Grid>

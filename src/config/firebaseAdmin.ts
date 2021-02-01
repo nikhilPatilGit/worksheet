@@ -1,12 +1,10 @@
 import * as firebaseAdmin from 'firebase-admin';
 
+var serviceAccount = require("/Users/nikhilpatil/Documents/worksheet-admin/testing-45c2e-firebase-adminsdk-rvy5e-729d774a01.json");
+
 if (!firebaseAdmin.apps.length) {
     firebaseAdmin.initializeApp({
-        credential: firebaseAdmin.credential.cert({
-            privateKey: process.env.NEXT_PUBLIC_PRIVATE_KEY,
-            clientEmail: process.env.NEXT_PUBLIC_CLIENT_EMAIL,
-            projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-        })
+        credential: firebaseAdmin.credential.cert(serviceAccount)
     });
 }
 export { firebaseAdmin };

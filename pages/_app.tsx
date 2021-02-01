@@ -24,6 +24,9 @@ const colors = {
         gray: "#8c8c8c",
         grayLight: "#a7a5a6",
     },
+    text: {
+      white: "#F0F3F4"
+    }
 };
 
 
