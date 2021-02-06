@@ -2,8 +2,10 @@ import { Box, Heading, Grid, Text, Button, useToast, SimpleGrid, Image } from "@
 import React, { FC, useContext, useEffect, useState } from "react";
 import CustomGridItem from "../../../util/CustomGridItem";
 import {LoginModal} from "../../SignIn/LoginModal";
-import {useAuth} from "../../../hooks/Auth";
 import {NavText} from "./navText";
+import { AccountMangerPopup } from "./AccountMangerPopup";
+import { AccountManger } from "./AccountManager";
+import { AuthSwitch } from "./AuthSwitch";
 
 const MenuItems = ({ children }) => (
   <Text mt={{ base: 4, md: 0 }} mr={6} display="block">
@@ -15,17 +17,18 @@ const LandingPageNavBar: FC = ({ ...props }) => {
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
 
+
   // row-start/col-start/row-end/col-end
 
   const gridValues = {
-    logo: "1/1/1/2",
+    logo: "1/2/1/3",
     drawerIcon: "1/12/1/12",
     menuItem1M: "3/1/3/span 12",
-    menuItem1D: "1/3/1/4",
+    menuItem1D: "1/4/1/5",
     menuItem2M: "4/1/4/span 12",
-    menuItem2D: "1/4/1/5",
+    menuItem2D: "1/5/1/6",
     menuItem3M: "5/1/5/span 12",
-    menuItem3D: "1/5/1/6",
+    menuItem3D: "1/6/1/7",
   };
 
   const displayValues = {
@@ -55,7 +58,10 @@ const LandingPageNavBar: FC = ({ ...props }) => {
         gridAreaM={gridValues.drawerIcon}
         gridAreaD={gridValues.drawerIcon}
       >
-        <LoginModal />
+
+        <AuthSwitch />
+        {/* <LoginModal /> */}
+        {/* <AccountManger/> */}
       </CustomGridItem>
 
       <CustomGridItem

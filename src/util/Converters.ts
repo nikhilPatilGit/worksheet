@@ -1,6 +1,9 @@
 // import { createContext } from "react";
 // import { TextWidget, Widget } from "../component/Widget/Model";
 
+import { firebase } from "src/config/firebase";
+import { User } from "src/modals/User";
+
 // export const WidgetToJson = <Widget>(widgetObject: Widget): string => {
 //   return JSON.stringify(widgetObject).replace("_", "");
 // };
@@ -25,3 +28,9 @@
 // ): obj is X & Record<Y, unknown> => {
 //   return obj.hasOwnProperty(prop);
 // };
+
+
+export const FirebaseUserToUser = (firebaseUser: firebase.User ): User => {
+    let user: User = new User(firebaseUser.uid, firebaseUser.displayName, firebaseUser.email, firebaseUser.photoURL);
+    return user;
+}

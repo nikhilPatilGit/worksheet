@@ -23,8 +23,10 @@ import {DocumentState} from "../../hooks/DocumentProvider/DocumentState";
 import {DocumentStateContext} from "../../hooks/DocumentProvider";
 import {useRouter} from "next/router";
 import {firebase} from "../../config/firebase";
+import { useAuth } from "src/hooks/Auth";
 
 export const LoginModal = () => {
+
 
     const {isOpen, onOpen, onClose} = useDisclosure();
 

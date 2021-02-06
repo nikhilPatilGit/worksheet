@@ -2,7 +2,7 @@ import { Box, Center, Image, Text } from "@chakra-ui/react";
 import React, {useEffect} from "react";
 import ReactCursorPosition from 'react-cursor-position';
 import {useRequireAuth} from "../src/hooks/Auth/AuthRequire";
-import {useAuth} from "../src/hooks/Auth";
+
 import {firebase} from "../src/config/firebase";
 
 import { InferGetServerSidePropsType, GetServerSidePropsContext } from "next";
@@ -33,11 +33,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
 const Dashboard = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
-    const {user} = useAuth();
-
-    useEffect(() => {
-        console.log(user);
-    });
 
     const handleImageUpload = async (event) => {
       const files = event.target.files;

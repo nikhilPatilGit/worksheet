@@ -26,6 +26,7 @@ const colors = {
     },
     text: {
       white: "#F0F3F4"
+      
     }
 };
 

@@ -22,6 +22,8 @@ export enum ActionType {
   DeleteWidget,
   UpdatePosition,
   UpdateTextWidget,
+  SetUser,
+  SetAuthStatus,
   SignIn,
   SignOut,
   UpdateUser,

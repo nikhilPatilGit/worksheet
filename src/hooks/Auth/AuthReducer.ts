@@ -14,19 +14,17 @@ const updateObject = (
 
 const signIn = (state: AuthState, action: Action): AuthState => {
   let actionResult = action as ActionResult<User>;
-  return {...state, currentUser: actionResult.result};
+  return {...state, currentUser: actionResult.result, isAuthenticated: true};
 };
 
 const signOut = (state: AuthState, action: Action): AuthState => {
-  return {...state, currentUser: undefined};
+  return {...state, currentUser: null, isAuthenticated: false};
 };
 
-const handleError = (state: AuthState, action: Action): AuthState => {
-  let actionResult = action as ActionResult<Error>;
-  return updateObject(state, {error: actionResult.result});
+const setAuthStatus = (state: AuthState, action: Action): AuthState => {
+  let actionResult = action as ActionResult<boolean>;
+  return {...state, isAuthenticated: actionResult.result};
 }
-
-
 
 export const AuthReducer: Reducer<AuthState, Action> = (
     authState: AuthState,
@@ -35,7 +33,7 @@ export const AuthReducer: Reducer<AuthState, Action> = (
   let map: MapAuthActionState = new Map([
     [ActionType.SignIn, signIn],
     [ActionType.SignOut, signOut],
-    [ActionType.ErrorThrown, handleError]
+    [ActionType.SetAuthStatus, setAuthStatus]
   ]);
   return (map.has(authAction.actionType) ? map.get(authAction.actionType)(authState, authAction) : authState);
 };
