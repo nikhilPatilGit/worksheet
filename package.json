@@ -40,6 +40,8 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "12.6.3",
     "@types/jest": "^26.0.19",
     "@types/node": "^14.14.10",
     "@types/react": "^17.0.0",
