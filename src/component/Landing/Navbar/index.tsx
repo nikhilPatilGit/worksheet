@@ -3,9 +3,9 @@ import React, { FC, useContext, useEffect, useState } from "react";
 import CustomGridItem from "../../../util/CustomGridItem";
 import {LoginModal} from "../../SignIn/LoginModal";
 import {NavText} from "./navText";
-import { AccountMangerPopup } from "./AccountMangerPopup";
-import { AccountManger } from "./AccountManager";
+import { AccountMangerPopup } from "../../ProfileAccount/AccountMangerPopup";
 import { AuthSwitch } from "./AuthSwitch";
+import { NavDrawer } from "src/component/Drawer";
 
 const MenuItems = ({ children }) => (
   <Text mt={{ base: 4, md: 0 }} mr={6} display="block">
@@ -22,13 +22,16 @@ const LandingPageNavBar: FC = ({ ...props }) => {
 
   const gridValues = {
     logo: "1/2/1/3",
-    drawerIcon: "1/12/1/12",
+    drawerIcon: "1/1/1/2",
     menuItem1M: "3/1/3/span 12",
     menuItem1D: "1/4/1/5",
     menuItem2M: "4/1/4/span 12",
     menuItem2D: "1/5/1/6",
     menuItem3M: "5/1/5/span 12",
     menuItem3D: "1/6/1/7",
+
+    menuItem4D: "1/10/1/12",
+    menuItem4M: "1/10/1/12"
   };
 
   const displayValues = {
@@ -49,36 +52,13 @@ const LandingPageNavBar: FC = ({ ...props }) => {
       gridGap={2}
       m={2}
     >
+
+      <CustomGridItem gridAreaD={gridValues.drawerIcon}>
+        <NavDrawer />  
+      </CustomGridItem>
+
       <CustomGridItem gridAreaM={gridValues.logo} gridAreaD={gridValues.logo}>
-        <NavText text={"EASIFIE"} size={"3xl"} fontFamily={"Roboto"} />
-      </CustomGridItem>
-
-      <CustomGridItem
-        displayStatus={displayValues.dDisplay}
-        gridAreaM={gridValues.drawerIcon}
-        gridAreaD={gridValues.drawerIcon}
-      >
-
-        <AuthSwitch />
-        {/* <LoginModal /> */}
-        {/* <AccountManger/> */}
-      </CustomGridItem>
-
-      <CustomGridItem
-        displayStatus={displayValues.mDisplay}
-        gridAreaM={gridValues.drawerIcon}
-        gridAreaD={gridValues.drawerIcon}
-      >
-        <svg
-          fill="black"
-          width="22px"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-          onClick={() =>  handleToggle()}
-        >
-          <title>Menu</title>
-          <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-        </svg>
+        <NavText text={"EASIFIE"} size={"3xl"} fontFamily={"Roboto"} />        
       </CustomGridItem>
 
       <CustomGridItem
@@ -103,6 +83,14 @@ const LandingPageNavBar: FC = ({ ...props }) => {
         gridAreaD={gridValues.menuItem3D}
       >
         <NavText text={"Dashboard"} size={"md"}/>
+      </CustomGridItem>
+
+      <CustomGridItem
+        displayStatus={displayValues.dDisplay}
+        gridAreaM={gridValues.menuItem4M}
+        gridAreaD={gridValues.menuItem4D}
+      >
+        <AuthSwitch />
       </CustomGridItem>
 
     </Grid>

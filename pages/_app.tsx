@@ -23,10 +23,11 @@ const colors = {
         blue: "#72DEFF",
         gray: "#8c8c8c",
         grayLight: "#a7a5a6",
+        white: "#F0F3F4",
+        background: "#303a4e"     
     },
     text: {
-      white: "#F0F3F4"
-      
+      white: "#F0F3F4"      
     }
 };
 

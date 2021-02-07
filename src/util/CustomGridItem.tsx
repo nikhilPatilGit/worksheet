@@ -2,7 +2,7 @@ import { GridItem, Center, Box } from "@chakra-ui/react";
 import { FC } from "react";
 
 interface IProps {
-    gridAreaM: string,
+    gridAreaM?: string,
     gridAreaD: string,
     displayStatus?: string[]
 }

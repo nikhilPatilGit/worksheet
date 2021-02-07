@@ -1,9 +1,9 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { FC, useEffect } from "react";
+import { AccountManger } from "src/component/ProfileAccount";
 import { LoginModal } from "src/component/SignIn/LoginModal";
 import { AuthStateContext } from "src/hooks/Auth";
 import { AuthState } from "src/hooks/Auth/AuthState";
-import { AccountManger } from "./AccountManager";
 
 export const AuthSwitch: FC = ({...props}) => {
 

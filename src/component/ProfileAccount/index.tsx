@@ -1,7 +1,7 @@
 import { AccountMangerPopup } from "./AccountMangerPopup";
 import React, { useContext, useEffect } from "react";
 import { Grid, Box, Link, Icon, Image, Text } from "@chakra-ui/react";
-import {firebase} from "../../../config/firebase";
+import {firebase} from "../../config/firebase";
 import { AuthState } from "src/hooks/Auth/AuthState";
 import { AuthStateContext } from "src/hooks/Auth";
 import { useState } from "react";
