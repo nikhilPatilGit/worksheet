@@ -70,7 +70,7 @@ const LandingPageNavBar: FC = ({ ...props }) => {
         gridAreaD={gridValues.drawerIcon}
       >
         <svg
-          fill="white"
+          fill="black"
           width="22px"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
