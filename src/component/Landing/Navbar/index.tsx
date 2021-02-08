@@ -21,17 +21,16 @@ const LandingPageNavBar: FC = ({ ...props }) => {
   // row-start/col-start/row-end/col-end
 
   const gridValues = {
-    logo: "1/2/1/3",
-    drawerIcon: "1/1/1/2",
-    menuItem1M: "3/1/3/span 12",
-    menuItem1D: "1/4/1/5",
-    menuItem2M: "4/1/4/span 12",
-    menuItem2D: "1/5/1/6",
-    menuItem3M: "5/1/5/span 12",
-    menuItem3D: "1/6/1/7",
+    menuItem1D: "1/1/1/1",
+    menuItem2D: "1/2/1/3",
+    menuItem3D: "1/4/1/6",
+    menuItem4D: "1/6/1/7",
+    menuItem5D: "1/7/1/8",
+    menuItem6D: "1/11/1/11",
 
-    menuItem4D: "1/10/1/12",
-    menuItem4M: "1/10/1/12"
+    menuItem1M: "1/1/1/2",
+    menuItem2M: "1/4/1/9",    
+    menuItem3M: "1/10/1/12",
   };
 
   const displayValues = {
@@ -41,54 +40,46 @@ const LandingPageNavBar: FC = ({ ...props }) => {
 
   return (
     <Grid
-      templateRows={[
-        show ? "repeat(5, 1fr)" : "1",
-        "repeat(5, 1fr)",
-        "50px",
-        "50px",
-      ]}
-      templateColumns="repeat(7, 130px)"
+      templateColumns={"repeat(12, 1fr)"}
       bg="#303a4e"
       gridGap={2}
       m={2}
     >
 
-      <CustomGridItem gridAreaD={gridValues.drawerIcon}>
+      <CustomGridItem displayStatus={displayValues.mDisplay} gridAreaM={gridValues.menuItem1M} gridAreaD={gridValues.menuItem1D}>
         <NavDrawer />  
       </CustomGridItem>
 
-      <CustomGridItem gridAreaM={gridValues.logo} gridAreaD={gridValues.logo}>
+      <CustomGridItem 
+      gridAreaM={gridValues.menuItem2M}
+      gridAreaD={gridValues.menuItem2D}>
         <NavText text={"EASIFIE"} size={"3xl"} fontFamily={"Roboto"} />        
       </CustomGridItem>
 
       <CustomGridItem
-        displayStatus={[show ? "block": "none", "none", "block", "block"]}
-        gridAreaM={gridValues.menuItem1M}
-        gridAreaD={gridValues.menuItem1D}
+        displayStatus={displayValues.dDisplay}
+        gridAreaD={gridValues.menuItem3D}
       >
-        <NavText text={"What is Easifie?"} size={"md"}  />
+        <NavText placement="start" text={"What is Easifie?"} size={"md"}  />
       </CustomGridItem>
 
       <CustomGridItem
-        displayStatus={[show ? "block": "none", "none", "block", "block"]}
-        gridAreaM={gridValues.menuItem2M}
-        gridAreaD={gridValues.menuItem2D}
+        displayStatus={displayValues.dDisplay}
+        gridAreaD={gridValues.menuItem4D}
       >
         <NavText text={"Demo"} size={"md"}/>
       </CustomGridItem>
 
       <CustomGridItem
-        displayStatus={[show ? "block": "none", "none", "block", "block"]}
-        gridAreaM={gridValues.menuItem3M}
-        gridAreaD={gridValues.menuItem3D}
+        displayStatus={displayValues.dDisplay}
+        gridAreaD={gridValues.menuItem5D}
       >
-        <NavText text={"Dashboard"} size={"md"}/>
+        <NavText url="/dashboard" placement="start" text={"Dashboard"} size={"md"}/>
       </CustomGridItem>
 
       <CustomGridItem
-        displayStatus={displayValues.dDisplay}
-        gridAreaM={gridValues.menuItem4M}
-        gridAreaD={gridValues.menuItem4D}
+        gridAreaM={gridValues.menuItem3M}
+        gridAreaD={gridValues.menuItem6D}
       >
         <AuthSwitch />
       </CustomGridItem>

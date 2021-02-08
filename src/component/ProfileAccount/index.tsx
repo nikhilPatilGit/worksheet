@@ -5,10 +5,10 @@ import {firebase} from "../../config/firebase";
 import { AuthState } from "src/hooks/Auth/AuthState";
 import { AuthStateContext } from "src/hooks/Auth";
 import { useState } from "react";
-import _ from "lodash";
 
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { ChevronDownIcon } from '@chakra-ui/icons'
+import _ from "lodash";
 
 
 export const AccountManger = () => {
@@ -19,8 +19,8 @@ export const AccountManger = () => {
   const [profilePicture, setProfilePicture] = useState<string>("default_icon.png");
 
   useEffect(() => {
-    if(_.isString(authState.currentUser.name)){
-      setUsername(authState.currentUser.name);
+    if(_.isString(authState.currentUser.name)){                      
+      setUsername(_.split(authState.currentUser.name, ' ', 1)[0]);
     }
 
     if(_.isString(authState.currentUser.photoUrl)){
@@ -54,12 +54,12 @@ export const AccountManger = () => {
         w={["100px", "100px", "180px", "180px"]}
         h="50px"
         templateColumns={[
-          "repeat(2, 40px)",
-          "repeat(2, 40px)",
-          "40px fit-content(100px) 40px",
-          "40px fit-content(100px) 40px",
+          "40px 32px",
+          "40px 32px",          
+          "40px fit-content(100px) 32px",
+          "40px fit-content(100px) 32px",
         ]}
-        gap={2}
+        gap={1}
       >
         <Box as={Link} onClick={open} p={1} size="40px">
           <Image rounded="full" src={profilePicture} />
@@ -73,6 +73,7 @@ export const AccountManger = () => {
           fontSize="lg"
           color="text.white"
           display={["none", "none", "block", "block"]}
+          isTruncated
         >
           {username}
         </Text>

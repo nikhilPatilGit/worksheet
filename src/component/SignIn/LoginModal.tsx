@@ -39,7 +39,7 @@ export const LoginModal = () => {
                 onClick={onOpen}
                 fontSize={["xs", "lg", "sm", "md"]}
                 fontWeight="bold"
-                size="md"
+                size="sm"
                 _hover={{ bg: primaryLightColor }}
                 backgroundColor={primaryColor}         
                 textColor="text.white"   
