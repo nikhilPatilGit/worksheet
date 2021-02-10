@@ -1,21 +1,13 @@
-import { Box, Heading, Grid, Text, Button, useToast, SimpleGrid, Image } from "@chakra-ui/react";
-import React, { FC, useContext, useEffect, useState } from "react";
+import { Grid } from "@chakra-ui/react";
+import React, { FC, useState } from "react";
 import CustomGridItem from "../../../util/CustomGridItem";
-import {LoginModal} from "../../SignIn/LoginModal";
 import {NavText} from "./navText";
-import { AccountMangerPopup } from "../../ProfileAccount/AccountMangerPopup";
 import { AuthSwitch } from "./AuthSwitch";
 import { NavDrawer } from "src/component/Drawer";
 
-const MenuItems = ({ children }) => (
-  <Text mt={{ base: 4, md: 0 }} mr={6} display="block">
-    {children}
-  </Text>
-);
 
-const LandingPageNavBar: FC = ({ ...props }) => {
+const LandingPageNavBar: FC = ({ }) => {
   const [show, setShow] = useState(false);
-  const handleToggle = () => setShow(!show);
 
 
   // row-start/col-start/row-end/col-end
@@ -40,8 +32,8 @@ const LandingPageNavBar: FC = ({ ...props }) => {
 
   return (
     <Grid
-      templateColumns={"repeat(12, 1fr)"}
-      bg="#303a4e"
+      templateColumns="repeat(12, 1fr)"
+      bg="secondry.background"
       gridGap={2}
       m={2}
     >

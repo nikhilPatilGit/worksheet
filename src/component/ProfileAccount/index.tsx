@@ -19,13 +19,8 @@ export const AccountManger = () => {
   const [profilePicture, setProfilePicture] = useState<string>("default_icon.png");
 
   useEffect(() => {
-    if(_.isString(authState.currentUser.name)){                      
-      setUsername(_.split(authState.currentUser.name, ' ', 1)[0]);
-    }
-
-    if(_.isString(authState.currentUser.photoUrl)){
-      setProfilePicture(authState.currentUser.photoUrl);
-    }
+    setUsername(_.split(_.get(authState, 'currentUser.name', 'Guest'), ' ', 1)[0]);
+    setProfilePicture(_.get(authState, 'currentUser.photoUrl', 'default_icon.png'));    
   }, [authState.currentUser]);
 
   const formatUserName = (): string => {

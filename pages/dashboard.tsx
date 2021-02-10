@@ -1,13 +1,15 @@
 import { Box, Center, Image, Text } from "@chakra-ui/react";
-import React, {useEffect} from "react";
+import React, {FC, useEffect} from "react";
 import ReactCursorPosition from 'react-cursor-position';
-import {useRequireAuth} from "../src/hooks/Auth/AuthRequire";
-
 import {firebase} from "../src/config/firebase";
 
 import { InferGetServerSidePropsType, GetServerSidePropsContext } from "next";
 import nookies from "nookies";
 import {firebaseAdmin} from "../src/config/firebaseAdmin";
+import DashboardNavBar from "src/component/Dashboard/NavBar";
+import { Dashboard } from "src/component/Dashboard";
+import Layout from "src/component/Landing/Layout";
+
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     try {
@@ -19,7 +21,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
             props: { message: `Your email is ${email} and your UID is ${uid}.` },
         };
     } catch (err) {
-
+        console.log(err);
         return {
             redirect: {
                 permanent: false,
@@ -31,37 +33,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     }
 };
 
-const Dashboard = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-
-
-    const handleImageUpload = async (event) => {
-      const files = event.target.files;
-      let formData = new FormData();
-      formData.append('file', files[0]);
-
-      await fetch('http://localhost:8080/uploadFile', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data)
-      })
-      .catch(error => {
-        console.error(error)
-      })
-
-        console.log(event.movementX);
-        console.log(event.movementY);        
-    }
-
-  return (
-    <Box>       
-          <Center>
-            <input onChange={handleImageUpload} type="file" id="fileUpload" />
-          </Center>
-    </Box>
-  );
+const DashboardPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  return <Dashboard />;
 };
 
-export default Dashboard;
+export default DashboardPage;
+
