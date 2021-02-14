@@ -2,7 +2,7 @@ import {
   FirestoreDataConverter,
   DocumentSnapshot,
 } from "@firebase/firestore-types";
-import { db } from "src/config/firebase";
+import { firebase } from "src/config/firebase";
 
 export const storeDocumentInCollection = async <T>(
   collectionPath: string,
@@ -10,7 +10,7 @@ export const storeDocumentInCollection = async <T>(
   genericObject: T, 
   converter: FirestoreDataConverter<T>
 ): Promise<void> => {
-  return await db
+  return await firebase.firestore()
     .collection(collectionPath)
     .doc(id)
     .withConverter(converter)
@@ -26,7 +26,7 @@ export const updateDocumentInCollection = async <T>(
   id: string,
   genericObject: T
 ): Promise<void> => {
-  await db
+  await firebase.firestore()
     .collection(collectionPath)
     .doc(id)
     .update(genericObject)
@@ -41,7 +41,7 @@ export const getDocumentById = async <T>(
   id: string,
   converter: FirestoreDataConverter<T>
 ): Promise<T> => {
-  return await db
+  return await firebase.firestore()
     .collection(collectionPath)
     .doc(id)
     .withConverter(converter)
@@ -61,7 +61,7 @@ export const deleteDocumentById = async (
   collectionPath: string,
   id: string
 ): Promise<void> => {
-  await db
+  await firebase.firestore()
     .collection(collectionPath)
     .doc(id)
     .delete()

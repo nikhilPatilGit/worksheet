@@ -27,7 +27,11 @@ export enum ActionType {
   SignIn,
   SignOut,
   UpdateUser,
-  ErrorThrown
+  ErrorThrown,
+  ResetDashModal,
+  ShowDashSpinner,
+  SetCurrentDocumentId,
+  ShowDashDetailForm
 };
 
 // export type DocumentAction =

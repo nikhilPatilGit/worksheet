@@ -8,6 +8,7 @@ import { Icon } from "@chakra-ui/react"
 import { MdFileUpload } from "react-icons/md"
 import { AccountManger } from "src/component/ProfileAccount";
 import { UploadWorksheet } from "./UploadWorksheet";
+import { DashboardModal } from "../Modal";
 
 const DashboardNavBar: FC = () => {
 

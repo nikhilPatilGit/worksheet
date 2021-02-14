@@ -1,5 +1,5 @@
 import { method } from "lodash";
-import { auth } from "src/config/firebase";
+import { parseCookies } from "nookies";
 
 export const TestGet = async () => {
   return await fetch("http://localhost:8080/hello")
@@ -8,18 +8,22 @@ export const TestGet = async () => {
     .catch((error) => console.log(error));
 };
 
-export const TestPost = async () => {
+export const UploadPdf = async (formData: FormData) => {
 
-
-  // return await fetch("http://localhost:8080/helloPost", {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify('"name":"Nikhil"'),
-  // })
-  //   .then((response) => response.text())
-  //   .then((data) => console.log(data))
-  //   .catch((error) => console.log(error));
+const token = parseCookies().token;
+  
+return await fetch('http://localhost:8080/uploadFile', {
+  method: 'POST',
+  body: formData,
+  headers: new Headers({
+    'Authorization': token
+  })
+})
+  .then(response => {
+    return response.text();
+  })
+  .catch(error => {
+    throw new Error(error);
+  });
 
 };
